@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Projeto_Casa_Criancas.Models.Visita>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.aluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.assistenteID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.situacaoFamiliar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.acoesPreliminares)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contextoExterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contextoFamiliar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.redeApoio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.violacaoDireito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.encaminhamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.compactacoes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.escolarizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.violenciaDomestica)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.aluno.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.assistenteID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.situacaoFamiliar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.acoesPreliminares)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contextoExterno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contextoFamiliar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.redeApoio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.violacaoDireito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.encaminhamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.compactacoes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.escolarizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.violenciaDomestica)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

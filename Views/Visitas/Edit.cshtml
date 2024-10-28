@@ -1,0 +1,100 @@
+﻿@model Projeto_Casa_Criancas.Models.Visita
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Visita</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="alunoID" class="control-label"></label>
+                <select asp-for="alunoID" class="form-control" asp-items="ViewBag.alunoID"></select>
+                <span asp-validation-for="alunoID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="assistenteID" class="control-label"></label>
+                <input asp-for="assistenteID" class="form-control" />
+                <span asp-validation-for="assistenteID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="data" class="control-label"></label>
+                <input asp-for="data" class="form-control" />
+                <span asp-validation-for="data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="status" class="control-label"></label>
+                <input asp-for="status" class="form-control" />
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="situacaoFamiliar" class="control-label"></label>
+                <input asp-for="situacaoFamiliar" class="form-control" />
+                <span asp-validation-for="situacaoFamiliar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="acoesPreliminares" class="control-label"></label>
+                <input asp-for="acoesPreliminares" class="form-control" />
+                <span asp-validation-for="acoesPreliminares" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="contextoExterno" class="control-label"></label>
+                <input asp-for="contextoExterno" class="form-control" />
+                <span asp-validation-for="contextoExterno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="contextoFamiliar" class="control-label"></label>
+                <input asp-for="contextoFamiliar" class="form-control" />
+                <span asp-validation-for="contextoFamiliar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="redeApoio" class="control-label"></label>
+                <input asp-for="redeApoio" class="form-control" />
+                <span asp-validation-for="redeApoio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="violacaoDireito" class="control-label"></label>
+                <input asp-for="violacaoDireito" class="form-control" />
+                <span asp-validation-for="violacaoDireito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="encaminhamento" class="control-label"></label>
+                <input asp-for="encaminhamento" class="form-control" />
+                <span asp-validation-for="encaminhamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="compactacoes" class="control-label"></label>
+                <input asp-for="compactacoes" class="form-control" />
+                <span asp-validation-for="compactacoes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="escolarizacao" class="control-label"></label>
+                <input asp-for="escolarizacao" class="form-control" />
+                <span asp-validation-for="escolarizacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="violenciaDomestica" class="control-label"></label>
+                <input asp-for="violenciaDomestica" class="form-control" />
+                <span asp-validation-for="violenciaDomestica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
