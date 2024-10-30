@@ -73,12 +73,20 @@
                                     <li class="w-100">
                                         <a class="nav-link px-0" asp-controller="Visitas" asp-action="Index"> <span class="d-none d-sm-inline">Visitas</span>  </a>
                                     </li>
+                                    <li class="w-100">
+                                        <a class="nav-link px-0" asp-controller="Monitores" asp-action="Index"> <span class="d-none d-sm-inline">Monitores</span>  </a>
+                                    </li>
                                 </ul>
                             </li>                                                
                            
                             <li>
                                 <a href="#" class="nav-link px-0 align-middle">
                                    <i class="fs-4 bi bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Relatórios</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Chamadas" asp-action="Index" class="nav-link px-0 align-middle">
+                                   <i class="fs-4 bi bi-check-circle"></i> <span class="ms-1 d-none d-sm-inline">Chamadas</span>
                                 </a>
                             </li>
                         </ul>

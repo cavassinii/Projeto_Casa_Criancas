@@ -7,27 +7,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Projeto_Casa_Criancas.Models;
+using ProjetoMonitor = Projeto_Casa_Criancas.Models.Monitor;
+
 
 namespace Projeto_Casa_Criancas.Controllers
 {
     //[Authorize(Roles = "Admin,Assistente")]
 
-    public class AssistenteSociaisController : Controller
+    public class MonitoresController : Controller
     {
         private readonly Contexto _context;
 
-        public AssistenteSociaisController(Contexto context)
+        public MonitoresController(Contexto context)
         {
             _context = context;
         }
 
-        // GET: AssistenteSociais
+        // GET: Monitores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.AssistenteSocial.ToListAsync());
+            return View(await _context.Monitor.ToListAsync());
         }
 
-        // GET: AssistenteSociais/Details/5
+        // GET: Monitores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,39 +37,39 @@ namespace Projeto_Casa_Criancas.Controllers
                 return NotFound();
             }
 
-            var assistenteSocial = await _context.AssistenteSocial
+            var monitor = await _context.Monitor
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (assistenteSocial == null)
+            if (monitor == null)
             {
                 return NotFound();
             }
 
-            return View(assistenteSocial);
+            return View(monitor);
         }
 
-        // GET: AssistenteSociais/Create
+        // GET: Monitores/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: AssistenteSociais/Create
+        // POST: Monitores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,nome,cpf,endereco,celular")] AssistenteSocial assistenteSocial)
+        public async Task<IActionResult> Create([Bind("Id,nome,cpf,endereco,celular")] ProjetoMonitor monitor)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(assistenteSocial);
+                _context.Add(monitor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(assistenteSocial);
+            return View(monitor);
         }
 
-        // GET: AssistenteSociais/Edit/5
+        // GET: Monitores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +77,22 @@ namespace Projeto_Casa_Criancas.Controllers
                 return NotFound();
             }
 
-            var assistenteSocial = await _context.AssistenteSocial.FindAsync(id);
-            if (assistenteSocial == null)
+            var monitor = await _context.Monitor.FindAsync(id);
+            if (monitor == null)
             {
                 return NotFound();
             }
-            return View(assistenteSocial);
+            return View(monitor);
         }
 
-        // POST: AssistenteSociais/Edit/5
+        // POST: Monitores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,nome,cpf,endereco,celular")] AssistenteSocial assistenteSocial)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,nome,cpf,endereco,celular")] ProjetoMonitor monitor)
         {
-            if (id != assistenteSocial.Id)
+            if (id != monitor.Id)
             {
                 return NotFound();
             }
@@ -99,12 +101,12 @@ namespace Projeto_Casa_Criancas.Controllers
             {
                 try
                 {
-                    _context.Update(assistenteSocial);
+                    _context.Update(monitor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AssistenteSocialExists(assistenteSocial.Id))
+                    if (!MonitorExists(monitor.Id))
                     {
                         return NotFound();
                     }
@@ -115,10 +117,10 @@ namespace Projeto_Casa_Criancas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(assistenteSocial);
+            return View(monitor);
         }
 
-        // GET: AssistenteSociais/Delete/5
+        // GET: Monitores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,34 +128,34 @@ namespace Projeto_Casa_Criancas.Controllers
                 return NotFound();
             }
 
-            var assistenteSocial = await _context.AssistenteSocial
+            var monitor = await _context.Monitor
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (assistenteSocial == null)
+            if (monitor == null)
             {
                 return NotFound();
             }
 
-            return View(assistenteSocial);
+            return View(monitor);
         }
 
-        // POST: AssistenteSociais/Delete/5
+        // POST: Monitores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var assistenteSocial = await _context.AssistenteSocial.FindAsync(id);
-            if (assistenteSocial != null)
+            var monitor = await _context.Monitor.FindAsync(id);
+            if (monitor != null)
             {
-                _context.AssistenteSocial.Remove(assistenteSocial);
+                _context.Monitor.Remove(monitor);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AssistenteSocialExists(int id)
+        private bool MonitorExists(int id)
         {
-            return _context.AssistenteSocial.Any(e => e.Id == id);
+            return _context.Monitor.Any(e => e.Id == id);
         }
     }
 }

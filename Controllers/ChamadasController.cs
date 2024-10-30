@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ using Projeto_Casa_Criancas.Models;
 
 namespace Projeto_Casa_Criancas.Controllers
 {
+    //[Authorize(Roles ="Monitor,Admin,Assistente")]
+
     public class ChamadasController : Controller
     {
         private readonly Contexto _context;
@@ -47,6 +50,7 @@ namespace Projeto_Casa_Criancas.Controllers
         // GET: Chamadas/Create
         public IActionResult Create()
         {
+
             ViewData["matriculaID"] = new SelectList(_context.Matriculas, "Id", "Id");
             return View();
         }
