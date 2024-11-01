@@ -20,11 +20,11 @@ namespace Projeto_Casa_Criancas.Models
         [Display(Name = "Descrição: ")]
         public String descricao { get; set; }
 
-        [Required(ErrorMessage = "Campo colaborador é obrigatório")]
         [Display(Name = "Colaborador: ")]
         [StringLength(35)]
         public Colaborador colaborador { get; set; }
 
+        [Required(ErrorMessage = "Campo colaborador é obrigatório")]
         [Display(Name = "Colaborador: ")]
         public int colaboradorID { get; set; }
 

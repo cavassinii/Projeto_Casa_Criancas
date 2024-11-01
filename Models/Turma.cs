@@ -10,24 +10,27 @@ namespace Projeto_Casa_Criancas.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Campo curso é obrigatório")]
         [Display(Name = "Curso: ")]
         [StringLength(35)]
         public Curso curso { get; set; }
+
+        [Required(ErrorMessage = "Campo curso é obrigatório")]
         [Display(Name = "Curso: ")]
         public int cursoID { get; set; }
 
-        [Required(ErrorMessage = "Campo monitor é obrigatório")]
         [Display(Name = "Monitor: ")]
         [StringLength(35)]
         public Monitor monitor { get; set; }
+
+        [Required(ErrorMessage = "Campo monitor é obrigatório")]
         [Display(Name = "Monitor: ")]
         public int monitorID { get; set; }
 
-        [Required(ErrorMessage = "Campo professor é obrigatório")]
         [Display(Name = "Professor: ")]
         [StringLength(35)]
         public Professor professor { get; set; }
+
+        [Required(ErrorMessage = "Campo professor é obrigatório")]
         [Display(Name = "Professor: ")]
         public int professorID { get; set; }
 

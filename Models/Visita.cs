@@ -10,17 +10,20 @@ namespace Projeto_Casa_Criancas.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Campo aluno é obrigatório")]
+       
         [Display(Name = "Aluno: ")]
         [StringLength(35)]
         public Aluno aluno { get; set; }
+
+        [Required(ErrorMessage = "Campo aluno é obrigatório")]
         [Display(Name = "Aluno: ")]
         public int alunoID { get; set; }
 
-        [Required(ErrorMessage = "Campo assistente social é obrigatório")]
         [Display(Name = "Assistente Social: ")]
         [StringLength(35)]
         public AssistenteSocial assistenteSocial{ get; set; }
+
+        [Required(ErrorMessage = "Campo assistente social é obrigatório")]
         [Display(Name = "Assistente Social: ")]
         public int assistenteID { get; set; }
 

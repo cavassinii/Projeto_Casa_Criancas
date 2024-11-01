@@ -30,10 +30,12 @@ namespace Projeto_Casa_Criancas.Models
         [Display(Name = "Celular: ")]
         public String celular { get; set; }
 
-        [Required(ErrorMessage = "Campo responsável é obrigatório")]
+        
         [Display(Name = "Responsável: ")]
         [StringLength(35)]
         public Responsavel responsavel { get; set; }
+
+        [Required(ErrorMessage = "Campo responsável é obrigatório")]
         [Display(Name = "Responsável: ")]
         public int responsavelID { get; set; }
 
