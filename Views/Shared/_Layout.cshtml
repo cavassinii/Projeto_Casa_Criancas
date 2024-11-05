@@ -1,6 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +23,13 @@
         }
         .row.flex-grow-1 {
             flex-grow: 1;
+        }
+
+        .custom-scroll {
+            padding-bottom: 0;
+            margin-bottom: 0; 
+            max-height: 100vh; 
+            overflow-y: auto; 
         }
     </style>
 
@@ -76,6 +81,9 @@
                                     <li class="w-100">
                                         <a class="nav-link px-0" asp-controller="Monitores" asp-action="Index"> <span class="d-none d-sm-inline">Monitores</span>  </a>
                                     </li>
+                                    <li class="w-100">
+                                        <a  class="nav-link px-0" asp-controller="AssistenteSociais" asp-action="Index"> <span class="d-none d-sm-inline">AssistenteSocial</span>  </a>
+                                    </li>
                                 </ul>
                             </li>                                                
                            
@@ -93,8 +101,7 @@
                         <hr>
                         <div class="dropdown pb-4">
                             <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                <span class="d-none d-sm-inline mx-1">  @User.Identity?.Name </span>
+                                <span class="d-none d-sm-inline mx-1 ">@User.Identity?.Name</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                                 <li>
@@ -112,16 +119,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col bg-light p-4">
+                <div class="col bg-light p-4 navbar-nav-scroll custom-scroll">
                         @RenderBody()
-                </div
+                </div>
 
             </div>
 
         </div>    
+
+</body>
+</html>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
