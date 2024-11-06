@@ -1,9 +1,83 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+﻿
+
+@{
+    var userEmail = User.Identity.Name ?? "usuario@exemplo.com";
+    var primeiroNome = userEmail.Split('@')[0];
+    primeiroNome = char.ToUpper(primeiroNome[0]) + primeiroNome.Substring(1);
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="logocontainer">
+	<img src="@(Url.Content("~/assets/logo.png"))" alt="Logótipo da Casa das Crianças" style="height: 7rem; width: 37rem;">
+
 </div>
+
+<div class="homecontainer">
+    <div class="sidebar">
+        <h1 style="display: flex; justify-content: center;">
+            Software Casa das Crianças
+        </h1>
+        <div>
+            <div>
+			    <img src="@(Url.Content("~/assets/casa-da-crianca.png"))" alt="Logótipo da Casa das Crianças" style="display:block; margin: auto; height: 100%; width: 70%;">
+			    <div>
+                    <p>Olá @primeiroNome! É um prazer imenso ter você novamente com a gente!<br>
+			           Esperamos que seu dia esteja indo bem e que o sistema seja uma ferramenta útil para suas tarefas.<br>
+			           Lembre-se de que estamos sempre aqui para tornar sua experiência cada vez melhor!
+				</div>
+            </div>
+		</div>
+    </div>
+</div>
+
+<footer class= "border-top footer text-muted">
+    <div class="footer-container">
+        &copy; 2019-2024 - Casa das Crianças - Dom Antônio - 2024 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+    </div>
+</footer>
+
+<style>
+    .logocontainer {
+        display: flex; /* Ativa o Flexbox */
+        justify-content: center; /* Centraliza horizontalmente */
+        align-items: center; /* Centraliza verticalmente */
+        max-width: 800px; /* Largura máxima do container */
+        margin: 0 auto; /* Centraliza o container */
+        background-color: white; /* Cor de fundo do container */
+        padding: 20px; /* Espaçamento interno */
+        border-radius: 8px; /* Cantos arredondados */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra do container */
+    }
+
+    .homecontainer {
+        max-width: 800px; /* Largura máxima do container */
+        margin: 20px auto; /* Centraliza o container */
+        background-color: white; /* Cor de fundo do container */
+        padding: 20px; /* Espaçamento interno */
+        border-radius: 8px; /* Cantos arredondados */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra do container */
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.1rem;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .footer {
+        text-align: center; /* Centraliza o conteúdo do footer */
+        padding: 20px 0; /* Espaçamento vertical */
+    }
+
+    .footer-container {
+        max-width: 500px; /* Largura máxima do container interno (ajuste conforme necessário) */
+        margin: 0 auto; /* Centraliza o container interno */
+        text-align: center; /* Centraliza o texto dentro do container */
+    }
+</style>
+

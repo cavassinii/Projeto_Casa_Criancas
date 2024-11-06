@@ -17,7 +17,7 @@ namespace Projeto_Casa_Criancas.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -31,6 +31,7 @@ namespace Projeto_Casa_Criancas.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("celular")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -38,6 +39,7 @@ namespace Projeto_Casa_Criancas.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("endereco")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -65,14 +67,17 @@ namespace Projeto_Casa_Criancas.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("celular")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("cpf")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("endereco")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -119,14 +124,17 @@ namespace Projeto_Casa_Criancas.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("celular")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("cnpj")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("endereco")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -152,6 +160,7 @@ namespace Projeto_Casa_Criancas.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("descricao")
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
@@ -202,14 +211,17 @@ namespace Projeto_Casa_Criancas.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("celular")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("cpf")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("endereco")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -232,14 +244,17 @@ namespace Projeto_Casa_Criancas.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("celular")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("cpf")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("endereco")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -262,6 +277,7 @@ namespace Projeto_Casa_Criancas.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("celular")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -290,6 +306,7 @@ namespace Projeto_Casa_Criancas.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("descricao")
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
@@ -328,7 +345,7 @@ namespace Projeto_Casa_Criancas.Migrations
                     b.Property<int>("assistenteID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("assistenteSocialId")
+                    b.Property<int>("assistenteSocialId")
                         .HasColumnType("int");
 
                     b.Property<string>("compactacoes")
@@ -363,6 +380,7 @@ namespace Projeto_Casa_Criancas.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("status")
+                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
@@ -472,7 +490,9 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.HasOne("Projeto_Casa_Criancas.Models.AssistenteSocial", "assistenteSocial")
                         .WithMany()
-                        .HasForeignKey("assistenteSocialId");
+                        .HasForeignKey("assistenteSocialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("aluno");
 
