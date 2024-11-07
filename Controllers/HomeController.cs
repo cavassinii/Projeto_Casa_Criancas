@@ -20,6 +20,11 @@ namespace Projeto_Casa_Criancas.Controllers
             return View();
         }
 
+        public IActionResult IndexPrincipal()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

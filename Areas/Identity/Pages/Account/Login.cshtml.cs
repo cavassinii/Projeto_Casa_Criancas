@@ -103,7 +103,7 @@ namespace Projeto_Casa_Criancas.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Action("Index", "Alunos");
+            returnUrl ??= Url.Action("Index", "Home");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
