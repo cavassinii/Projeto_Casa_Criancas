@@ -1,103 +1,143 @@
 ﻿@model Projeto_Casa_Criancas.Models.Visita
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes da Visita";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1><i class="bi bi-calendar-event-fill"></i>&nbsp;Detalhes da Visita</h1>
+<hr />
 
-<div>
-    <h4>Visita</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.aluno)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.aluno.nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.assistenteID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.assistenteID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.data)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.data)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.situacaoFamiliar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.situacaoFamiliar)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.acoesPreliminares)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.acoesPreliminares)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.contextoExterno)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.contextoExterno)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.contextoFamiliar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.contextoFamiliar)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.redeApoio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.redeApoio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.violacaoDireito)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.violacaoDireito)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.encaminhamento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.encaminhamento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.compactacoes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.compactacoes)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.escolarizacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.escolarizacao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.violenciaDomestica)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.violenciaDomestica)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container-fluid">
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-person-fill"></i>&nbsp;Aluno
+                    </label>
+                    <input class="form-control" value="@Model.aluno?.nome" disabled />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-person-badge-fill"></i>&nbsp;Assistente Social
+                    </label>
+                    <input class="form-control" value="@Model.assistenteSocial?.nome" disabled />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-calendar-event-fill"></i>&nbsp;Data da Visita
+                    </label>
+                    <input class="form-control" value="@Model.data.ToString("dd/MM/yyyy")" disabled />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-info-circle-fill"></i>&nbsp;Status
+                    </label>
+                    <input class="form-control" value="@Model.status" disabled />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-people-fill"></i>&nbsp;Situação Familiar
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.situacaoFamiliar</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-lightbulb-fill"></i>&nbsp;Ações Preliminares
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.acoesPreliminares</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-globe"></i>&nbsp;Contexto Externo
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.contextoExterno</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-house-door-fill"></i>&nbsp;Contexto Familiar
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.contextoFamiliar</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-people"></i>&nbsp;Rede de Apoio
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.redeApoio</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;Violação de Direito
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.violacaoDireito</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-send-fill"></i>&nbsp;Encaminhamento
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.encaminhamento</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-puzzle-fill"></i>&nbsp;Compactações
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.compactacoes</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-journal-bookmark-fill"></i>&nbsp;Escolarização
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.escolarizacao</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="control-label">
+                        <i class="bi bi-shield-exclamation"></i>&nbsp;Violência Doméstica
+                    </label>
+                    <textarea class="form-control" rows="3" disabled>@Model.violenciaDomestica</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">
+                <i class="bi bi-pencil-square"></i>&nbsp;Editar
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i>&nbsp;Voltar para a lista
+            </a>
+        </div>
+    </form>
 </div>

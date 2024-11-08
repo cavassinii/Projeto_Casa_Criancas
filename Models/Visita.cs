@@ -25,7 +25,7 @@ namespace Projeto_Casa_Criancas.Models
 
         [Required(ErrorMessage = "Campo assistente social é obrigatório")]
         [Display(Name = "Assistente Social: ")]
-        public int assistenteID { get; set; }
+        public int assistenteSocialID { get; set; }
 
         [Required(ErrorMessage = "Campo data é obrigatório")]
         [Display(Name = "Data: ")]

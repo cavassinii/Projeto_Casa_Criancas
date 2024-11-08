@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +9,6 @@ using Projeto_Casa_Criancas.Models;
 
 namespace Projeto_Casa_Criancas.Controllers
 {
-    //[Authorize(Roles = "Admin,Assistente")]
-
     public class VisitasController : Controller
     {
         private readonly Contexto _context;
@@ -24,7 +21,7 @@ namespace Projeto_Casa_Criancas.Controllers
         // GET: Visitas
         public async Task<IActionResult> Index()
         {
-            var contexto = _context.Visita.Include(v => v.aluno);
+            var contexto = _context.Visita.Include(v => v.aluno).Include(v => v.assistenteSocial);
             return View(await contexto.ToListAsync());
         }
 
@@ -38,6 +35,7 @@ namespace Projeto_Casa_Criancas.Controllers
 
             var visita = await _context.Visita
                 .Include(v => v.aluno)
+                .Include(v => v.assistenteSocial)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (visita == null)
             {
@@ -51,6 +49,7 @@ namespace Projeto_Casa_Criancas.Controllers
         public IActionResult Create()
         {
             ViewData["alunoID"] = new SelectList(_context.Aluno, "Id", "nome");
+            ViewData["assistenteSocialID"] = new SelectList(_context.AssistenteSocial, "Id", "nome");
             return View();
         }
 
@@ -59,7 +58,7 @@ namespace Projeto_Casa_Criancas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,alunoID,assistenteID,data,status,situacaoFamiliar,acoesPreliminares,contextoExterno,contextoFamiliar,redeApoio,violacaoDireito,encaminhamento,compactacoes,escolarizacao,violenciaDomestica")] Visita visita)
+        public async Task<IActionResult> Create([Bind("Id,alunoID,assistenteSocialID,data,status,situacaoFamiliar,acoesPreliminares,contextoExterno,contextoFamiliar,redeApoio,violacaoDireito,encaminhamento,compactacoes,escolarizacao,violenciaDomestica")] Visita visita)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +67,7 @@ namespace Projeto_Casa_Criancas.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["alunoID"] = new SelectList(_context.Aluno, "Id", "nome", visita.alunoID);
+            ViewData["assistenteSocialID"] = new SelectList(_context.AssistenteSocial, "Id", "nome", visita.assistenteSocialID);
             return View(visita);
         }
 
@@ -85,6 +85,7 @@ namespace Projeto_Casa_Criancas.Controllers
                 return NotFound();
             }
             ViewData["alunoID"] = new SelectList(_context.Aluno, "Id", "nome", visita.alunoID);
+            ViewData["assistenteSocialID"] = new SelectList(_context.AssistenteSocial, "Id", "nome", visita.assistenteSocialID);
             return View(visita);
         }
 
@@ -93,7 +94,7 @@ namespace Projeto_Casa_Criancas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,alunoID,assistenteID,data,status,situacaoFamiliar,acoesPreliminares,contextoExterno,contextoFamiliar,redeApoio,violacaoDireito,encaminhamento,compactacoes,escolarizacao,violenciaDomestica")] Visita visita)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,alunoID,assistenteSocialID,data,status,situacaoFamiliar,acoesPreliminares,contextoExterno,contextoFamiliar,redeApoio,violacaoDireito,encaminhamento,compactacoes,escolarizacao,violenciaDomestica")] Visita visita)
         {
             if (id != visita.Id)
             {
@@ -121,6 +122,7 @@ namespace Projeto_Casa_Criancas.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["alunoID"] = new SelectList(_context.Aluno, "Id", "nome", visita.alunoID);
+            ViewData["assistenteSocialID"] = new SelectList(_context.AssistenteSocial, "Id", "nome", visita.assistenteSocialID);
             return View(visita);
         }
 
@@ -134,6 +136,7 @@ namespace Projeto_Casa_Criancas.Controllers
 
             var visita = await _context.Visita
                 .Include(v => v.aluno)
+                .Include(v => v.assistenteSocial)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (visita == null)
             {
