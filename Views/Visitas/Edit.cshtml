@@ -1,100 +1,166 @@
 ﻿@model Projeto_Casa_Criancas.Models.Visita
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Visita";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Visita</h4>
+<h1><i class="bi bi-calendar-check-fill"></i>&nbsp;Editar Visita</h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="alunoID" class="control-label"></label>
-                <select asp-for="alunoID" class="form-control" asp-items="ViewBag.alunoID"></select>
-                <span asp-validation-for="alunoID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="assistenteID" class="control-label"></label>
-                <input asp-for="assistenteID" class="form-control" />
-                <span asp-validation-for="assistenteID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="data" class="control-label"></label>
-                <input asp-for="data" class="form-control" />
-                <span asp-validation-for="data" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="status" class="control-label"></label>
-                <input asp-for="status" class="form-control" />
-                <span asp-validation-for="status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="situacaoFamiliar" class="control-label"></label>
-                <input asp-for="situacaoFamiliar" class="form-control" />
-                <span asp-validation-for="situacaoFamiliar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="acoesPreliminares" class="control-label"></label>
-                <input asp-for="acoesPreliminares" class="form-control" />
-                <span asp-validation-for="acoesPreliminares" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="contextoExterno" class="control-label"></label>
-                <input asp-for="contextoExterno" class="form-control" />
-                <span asp-validation-for="contextoExterno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="contextoFamiliar" class="control-label"></label>
-                <input asp-for="contextoFamiliar" class="form-control" />
-                <span asp-validation-for="contextoFamiliar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="redeApoio" class="control-label"></label>
-                <input asp-for="redeApoio" class="form-control" />
-                <span asp-validation-for="redeApoio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="violacaoDireito" class="control-label"></label>
-                <input asp-for="violacaoDireito" class="form-control" />
-                <span asp-validation-for="violacaoDireito" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="encaminhamento" class="control-label"></label>
-                <input asp-for="encaminhamento" class="form-control" />
-                <span asp-validation-for="encaminhamento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="compactacoes" class="control-label"></label>
-                <input asp-for="compactacoes" class="form-control" />
-                <span asp-validation-for="compactacoes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="escolarizacao" class="control-label"></label>
-                <input asp-for="escolarizacao" class="form-control" />
-                <span asp-validation-for="escolarizacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="violenciaDomestica" class="control-label"></label>
-                <input asp-for="violenciaDomestica" class="form-control" />
-                <span asp-validation-for="violenciaDomestica" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container-fluid">
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="alunoID" class="control-label">
+                        <i class="bi bi-person-fill"></i>&nbsp;Aluno
+                    </label>
+                    <select asp-for="alunoID" class="form-control" asp-items="ViewBag.alunoID"></select>
+                    <span asp-validation-for="alunoID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="assistenteSocialID" class="control-label">
+                        <i class="bi bi-person-badge-fill"></i>&nbsp;Assistente Social
+                    </label>
+                    <select asp-for="assistenteSocialID" class="form-control" asp-items="ViewBag.assistenteSocialID"></select>
+                    <span asp-validation-for="assistenteSocialID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="data" class="control-label">
+                        <i class="bi bi-calendar-event-fill"></i>&nbsp;Data da Visita
+                    </label>
+                    <input asp-for="data" class="form-control" />
+                    <span asp-validation-for="data" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="status" class="control-label">
+                        <i class="bi bi-info-circle-fill"></i>&nbsp;Status
+                    </label>
+                    <input asp-for="status" class="form-control" />
+                    <span asp-validation-for="status" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="situacaoFamiliar" class="control-label">
+                        <i class="bi bi-people-fill"></i>&nbsp;Situação Familiar
+                    </label>
+                    <textarea asp-for="situacaoFamiliar" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="situacaoFamiliar" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="acoesPreliminares" class="control-label">
+                        <i class="bi bi-lightbulb-fill"></i>&nbsp;Ações Preliminares
+                    </label>
+                    <textarea asp-for="acoesPreliminares" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="acoesPreliminares" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="contextoExterno" class="control-label">
+                        <i class="bi bi-globe"></i>&nbsp;Contexto Externo
+                    </label>
+                    <textarea asp-for="contextoExterno" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="contextoExterno" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="contextoFamiliar" class="control-label">
+                        <i class="bi bi-house-door-fill"></i>&nbsp;Contexto Familiar
+                    </label>
+                    <textarea asp-for="contextoFamiliar" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="contextoFamiliar" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="redeApoio" class="control-label">
+                        <i class="bi bi-people"></i>&nbsp;Rede de Apoio
+                    </label>
+                    <textarea asp-for="redeApoio" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="redeApoio" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="violacaoDireito" class="control-label">
+                        <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;Violação de Direito
+                    </label>
+                    <textarea asp-for="violacaoDireito" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="violacaoDireito" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="encaminhamento" class="control-label">
+                        <i class="bi bi-send-fill"></i>&nbsp;Encaminhamento
+                    </label>
+                    <textarea asp-for="encaminhamento" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="encaminhamento" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="compactacoes" class="control-label">
+                        <i class="bi bi-puzzle-fill"></i>&nbsp;Compactações
+                    </label>
+                    <textarea asp-for="compactacoes" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="compactacoes" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="escolarizacao" class="control-label">
+                        <i class="bi bi-journal-bookmark-fill"></i>&nbsp;Escolarização
+                    </label>
+                    <textarea asp-for="escolarizacao" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="escolarizacao" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="violenciaDomestica" class="control-label">
+                        <i class="bi bi-shield-exclamation"></i>&nbsp;Violência Doméstica
+                    </label>
+                    <textarea asp-for="violenciaDomestica" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="violenciaDomestica" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-check-circle-fill"></i>&nbsp;Salvar
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left-circle"></i>&nbsp;Voltar
+            </a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
