@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Projeto_Casa_Criancas</title>
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image/x-icon" href="~/logoPequena.ico" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Projeto_Casa_Criancas.styles.css" asp-append-version="true" />
@@ -39,9 +40,10 @@
     </style>
 
 </head>
+
 <body class="px-4 ">
         <div class="container-fluid vh-100">
-        <div class="row flex-nowrap h-100" style="margin-top: 10px">
+            <div class="row flex-nowrap h-100" style="margin-top: 10px">
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark nav-bar" style="height:98%">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100" >
                         <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none text-center">
@@ -93,42 +95,42 @@
                            
                             <li>
                                 <a href="#" class="nav-link px-0 align-middle">
-                                   <i class="fs-4 bi bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Relatórios</span>
+                                    <i class="fs-4 bi bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Relatórios</span>
                                 </a>
                             </li>
                             <li>
                                 <a asp-controller="Chamadas" asp-action="Index" class="nav-link px-0 align-middle">
-                                   <i class="fs-4 bi bi-check-circle"></i> <span class="ms-1 d-none d-sm-inline">Chamadas</span>
+                                    <i class="fs-4 bi bi-check-circle"></i> <span class="ms-1 d-none d-sm-inline">Chamadas</span>
                                 </a>
                             </li>
                         </ul>
-                        
-                        <div class="dropdown pb-4">
-                            <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="d-none d-sm-inline mx-1 ">@User.Identity?.Name</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                                <li>
-                                    <a class="dropdown-item bi bi-person-circle" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> Conta</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li class="dropdown-item">
+                    </div>
+
+                    <div class="dropdown pb-4" style="cursor:pointer;">
+                        <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="d-none d-sm-inline mx-1 ">@User.Identity?.Name</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" style="cursor:pointer;">
+                            <li>
+                                <a class="dropdown-item bi bi-person-circle" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> Conta</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li class="dropdown-item" style="cursor:pointer;">
                                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("IndexPrincipal", "Home", new { area = "" })">
-                                        <button type="submit" class="nav-link btn btn-link text-white bi bi-box-arrow-left"> Sair</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
+                                    <button type="submit" class="nav-link btn btn-link text-white bi bi-box-arrow-left"> Sair</button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                     <div class="col bg-light p-4 navbar-nav-scroll custom-scroll" style="margin: 5px">
-                         @RenderBody()
-                    </div>
-  </div>
-        </div>    
+                <div class="col bg-light p-4 navbar-nav-scroll custom-scroll" style="margin: 5px">
+                    @RenderBody()
+                </div>
+            </div> 
+        </div>
 
 </body>
 </html>

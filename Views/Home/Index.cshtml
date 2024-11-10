@@ -1,11 +1,12 @@
 ﻿
-
 @{
+    ViewData["Title"] = "Casa da Criança";
+    
     var userEmail = User.Identity.Name ?? "usuario@exemplo.com";
     var primeiroNome = userEmail.Split('@')[0];
     primeiroNome = char.ToUpper(primeiroNome[0]) + primeiroNome.Substring(1);
 }
-
+ 
 <div class="logocontainer">
 	<img src="@(Url.Content("~/assets/logo.png"))" alt="Logótipo da Casa das Crianças" style="height: 7rem; width: 37rem;">
 
@@ -14,22 +15,38 @@
 <div class="homecontainer">
     <div class="sidebar">
         <h1 style="display: flex; justify-content: center;">
-            Software Casa das Crianças
+            Software Casa da Criança
         </h1>
         <div>
             <div>
-			    <img src="@(Url.Content("~/assets/casa-da-crianca.png"))" alt="Logótipo da Casa das Crianças" style="display:block; margin: auto; height: 100%; width: 70%;">
-			    <div>
-                    <p>Olá @primeiroNome! É um prazer imenso ter você novamente com a gente!<br>
-			           Esperamos que seu dia esteja indo bem e que o sistema seja uma ferramenta útil para suas tarefas.<br>
-			           Lembre-se de que estamos sempre aqui para tornar sua experiência cada vez melhor!
-				</div>
+			    <img src="@(Url.Content("~/assets/casa-da-crianca.png"))" alt="Logótipo da Casa das Crianças" style="display:block; margin: auto; height: 100%; width: 90%;">
+                <div class="minhaDiv">
+                    <p>
+                        Olá @primeiroNome! É um prazer imenso ter você novamente com a gente!<br>
+                    <p>
+                        Esperamos que seu dia esteja sendo produtivo e que o sistema esteja atendendo plenamente às suas necessidades,
+                        tornando suas tarefas mais fáceis e eficientes. <br/>Nossa equipe está sempre à disposição para garantir que você tenha a melhor
+                        experiência possível. Lembre-se de que estamos constantemente trabalhando para aprimorar e evoluir a plataforma,
+                        pensando em cada detalhe para atender você da melhor forma. Conte sempre conosco para tornar sua jornada mais tranquila
+                        e seu trabalho ainda mais gratificante!
+					    </p>
+                    </p>
+                </div>
             </div>
 		</div>
     </div>
 </div>
 
+
+
 <style>
+    .minhaDiv {
+        display: inline-block;
+        place-items: self-start;
+		justify-content: normal;
+		margin: 20px 38px 2px 38px;
+    }
+
     .logocontainer {
         display: flex; /* Ativa o Flexbox */
         justify-content: center; /* Centraliza horizontalmente */

@@ -1,8 +1,51 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    ViewData["Title"] = "Casa da Criança";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="meucontainer">
+    <br />
+	<h1>Bem-vindo(a) ao nosso sistema!</h1>
+    <br />
+    <img src="@(Url.Content("~/assets/casa-da-crianca.png"))" alt="Logótipo da Casa das Crianças" style="display:block; margin: auto; height: 100%; width: 90%;">
+    
+    <div class="minhaDiv" style="margin: 20px 38px 2px 38px;">
+        <p>Estamos prontos para ajudar e facilitar o seu trabalho, com uma experiência fluida e pensada para si.
+           Aqui encontrará suporte rápido, respostas precisas e funcionalidades otimizadas para atender às suas necessidades.
+           Qualquer dúvida ou questão, estamos à disposição para ajudar.</p>
+        <p>Esperamos que seu dia esteja indo bem e que o sistema seja uma ferramenta útil para suas tarefas.
+           Lembre-se de que estmos sempre aqui para tornar sua experiência cada vez melhor!</p>
+    </div>
 </div>
+
+    <style>
+        .meucontainer {
+            max-width: 800px; /* Largura máxima do container */
+            margin: 0 auto; /* Centraliza o container */
+            background-color: white; /* Cor de fundo do container */
+            padding: 20px; /* Espaçamento interno */
+            border-radius: 8px; /* Cantos arredondados */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra do container */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            text-align: justify;
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .minhaDiv {
+            display: inline-block;
+            place-items: self-start;
+            justify-content: normal;
+        }
+    </style>
