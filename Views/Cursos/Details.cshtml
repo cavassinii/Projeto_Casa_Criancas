@@ -1,37 +1,43 @@
-﻿@model Projeto_Casa_Criancas.Models.Curso
+@model Projeto_Casa_Criancas.Models.Curso
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Detalhes do Curso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1><i class="bi bi-person-lines-fill"></i>&nbsp;Detalhes do Curso</h1>
 
+<hr />
 <div>
-    <h4>Curso</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nome)
+            <i class="bi bi-person-fill"></i>&nbsp;Nome
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.nome)
         </dd>
+
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.descricao)
+            <i class="bi bi-file-text"></i>&nbsp;Descrição
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.descricao)
         </dd>
+
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.colaborador)
+            <i class="bi bi-person-badge-fill"></i>&nbsp;ColaboradorID
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.colaborador.nome)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning"> 
+        <i class="bi bi-pencil-fill"></i>&nbsp;Editar
+    </a>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left-circle"></i>&nbsp;Voltar para a Lista
+    </a>
 </div>
