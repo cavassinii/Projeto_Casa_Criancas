@@ -88,6 +88,31 @@ namespace Projeto_Casa_Criancas.Controllers
             return View(aluno);
         }
 
+        public IActionResult FiltrarAluno(string nome)
+        {
+            List<Aluno> listaAlunos;
+
+            if (!string.IsNullOrEmpty(nome)) 
+            {
+                listaAlunos = _context.Aluno
+                    .Include(a => a.responsavel)
+                    .Where(a => a.nome.Contains(nome))
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+            else 
+            {
+                listaAlunos = _context.Aluno
+                    .Include(a => a.responsavel)
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+
+            ViewData["Nome"] = nome;
+
+            return View("Index", listaAlunos); 
+        }
+
         // POST: Alunos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
