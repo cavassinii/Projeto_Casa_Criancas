@@ -21,6 +21,29 @@ namespace Projeto_Casa_Criancas.Controllers
             _context = context;
         }
 
+        public IActionResult FiltrarProfessor(string nome)
+        {
+            List<Professor> listaProfessores;
+
+            if (!string.IsNullOrEmpty(nome))
+            {
+                listaProfessores = _context.Professor
+                    .Where(a => a.nome.Contains(nome))
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+            else
+            {
+                listaProfessores = _context.Professor
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+
+            ViewData["Nome"] = nome;
+
+            return View("Index", listaProfessores);
+        }
+
         // GET: Professores
         public async Task<IActionResult> Index()
         {
@@ -82,6 +105,8 @@ namespace Projeto_Casa_Criancas.Controllers
             }
             return View(professor);
         }
+
+
 
         // POST: Professores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
