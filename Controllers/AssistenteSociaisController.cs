@@ -67,6 +67,26 @@ namespace Projeto_Casa_Criancas.Controllers
             return View(assistenteSocial);
         }
 
+        public IActionResult FiltrarAssistenteSocial(string nome)
+        {
+            List<Models.AssistenteSocial> listaAssistenteSocial;
+            if (!string.IsNullOrEmpty(nome))
+            {
+                listaAssistenteSocial = _context.AssistenteSocial
+                    .Where(a => a.nome.Contains(nome))
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+            else
+            {
+                listaAssistenteSocial = _context.AssistenteSocial
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+            ViewData["Nome"] = nome;
+            return View("Index", listaAssistenteSocial);
+        }
+
         // GET: AssistenteSociais/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

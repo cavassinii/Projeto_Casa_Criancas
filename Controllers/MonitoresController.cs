@@ -85,6 +85,29 @@ namespace Projeto_Casa_Criancas.Controllers
             return View(monitor);
         }
 
+        public IActionResult FiltrarMonitor(string nome)
+        {
+            List<ProjetoMonitor> listaMonitores;
+
+            if (!string.IsNullOrEmpty(nome))
+            {
+                listaMonitores = _context.Monitor
+                    .Where(a => a.nome.Contains(nome))
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+            else
+            {
+                listaMonitores = _context.Monitor
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+
+            ViewData["Nome"] = nome;
+
+            return View("Index", listaMonitores);
+        }
+
         // POST: Monitores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

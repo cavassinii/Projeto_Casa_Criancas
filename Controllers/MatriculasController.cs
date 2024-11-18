@@ -73,6 +73,28 @@ namespace Projeto_Casa_Criancas.Controllers
             ViewData["turmaID"] = new SelectList(_context.Turma, "Id", "Id", matricula.turmaID);
             return View(matricula);
         }
+        public IActionResult FiltrarMatriculas(string nome)
+        {
+            List<Models.Matricula> listaMatricula;
+            if (!string.IsNullOrEmpty(nome))
+            {
+                listaMatricula = _context.Matriculas
+                    .Include(m => m.aluno)
+                    .Where(m => m.aluno.nome.Contains(nome))
+                    .OrderBy(m => m.aluno.nome)
+                    .ToList();
+            }
+            else
+            {
+                listaMatricula = _context.Matriculas
+                    .Include(m => m.aluno)
+                    .OrderBy(m => m.aluno.nome)
+                    .ToList();
+            }
+            ViewData["Nome"] = nome;
+            return View("Index", listaMatricula);
+        }
+
 
         // GET: Matriculas/Edit/5
         public async Task<IActionResult> Edit(int? id)

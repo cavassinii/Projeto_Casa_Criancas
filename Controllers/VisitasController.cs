@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Projeto_Casa_Criancas.Models;
 
@@ -19,11 +20,43 @@ namespace Projeto_Casa_Criancas.Controllers
         }
 
         // GET: Visitas
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(int assistenteSocialID = 0, int alunoID = 0, DateOnly? dataInicio = null, DateOnly? dataFim = null)
         {
-            var contexto = _context.Visita.Include(v => v.aluno).Include(v => v.assistenteSocial);
-            return View(await contexto.ToListAsync());
+            List<Visita> listaVisitas = new List<Visita>();
+
+            var filtro =
+                         _context.Visita
+                        .Include(a => a.assistenteSocial)
+                        .Include(a => a.aluno)
+                        .AsQueryable();
+
+            if (assistenteSocialID != 0)
+            {
+                filtro = filtro.Where(a => a.assistenteSocialID == assistenteSocialID);
+            }
+            if(alunoID != 0)
+            {
+                filtro = filtro.Where(a => a.alunoID == alunoID);
+            }
+            if (dataInicio.HasValue)
+            {
+                filtro = filtro.Where(a => a.data >= dataInicio.Value);
+            }
+            if (dataFim.HasValue)
+            {
+                filtro = filtro.Where(a => a.data <= dataFim.Value);
+            }
+            listaVisitas = await filtro.ToListAsync();
+
+            ViewData["assistenteSocialID"] = new SelectList(_context.AssistenteSocial, "Id", "nome", assistenteSocialID);
+            ViewData["alunoID"] = new SelectList(_context.Aluno, "Id", "nome", alunoID);
+            ViewData["dataInicio"] = dataInicio;
+            ViewData["dataFim"] = dataFim;
+
+            return View(listaVisitas);
         }
+
 
         // GET: Visitas/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -84,7 +117,6 @@ namespace Projeto_Casa_Criancas.Controllers
             {
                 return NotFound();
             }
-            ViewData["alunoID"] = new SelectList(_context.Aluno, "Id", "nome", visita.alunoID);
             ViewData["assistenteSocialID"] = new SelectList(_context.AssistenteSocial, "Id", "nome", visita.assistenteSocialID);
             return View(visita);
         }

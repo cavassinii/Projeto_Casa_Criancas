@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Projeto_Casa_Criancas.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Projeto_Casa_Criancas.Controllers
 {
@@ -21,6 +22,67 @@ namespace Projeto_Casa_Criancas.Controllers
             _context = context;
         }
 
+        public IActionResult FiltrarTurmas(string descricao, int? cursoID, int? monitorID, int? professorID)
+        {
+            List<Turma> listaTurmas = new List<Turma>();
+
+            if (!string.IsNullOrEmpty(descricao))
+            {
+                listaTurmas = _context.Turma
+                    .Include(c => c.curso)
+                    .Include(m => m.monitor)
+                    .Include(p => p.professor)
+                    .Where(a => a.descricao.Contains(descricao))
+                    .OrderBy(a => a.descricao)
+                    .ToList();
+            }
+
+            else if (cursoID != null)
+            {
+                listaTurmas = _context.Turma
+                    .Include(c => c.curso)
+                    .Include(m => m.monitor)
+                    .Include(p => p.professor)
+                    .Where(a => a.cursoID == cursoID.Value)
+                    .ToList();
+            }
+
+            else if (monitorID != null)
+            {
+                listaTurmas = _context.Turma
+                    .Include(c => c.curso)
+                    .Include(m => m.monitor)
+                    .Include(p => p.professor)
+                    .Where(t => t.monitorID == monitorID.Value)
+                    .ToList();
+            }
+
+            else if (professorID != null)
+            {
+                listaTurmas = _context.Turma
+                    .Include(c => c.curso)
+                    .Include(m => m.monitor)
+                    .Include(p => p.professor)
+                    .Where(t => t.professorID == professorID.Value)
+                    .ToList();
+            }
+
+            else
+            {
+                listaTurmas = _context.Turma
+                    .Include(c => c.curso)
+                    .Include(m => m.monitor)
+                    .Include(p => p.professor)
+                    .ToList();
+            }
+
+            ViewData["descricao"] = descricao;
+            ViewData["cursoID"] = new SelectList(_context.Curso, "Id", "nome", cursoID);
+            ViewData["monitorID"] = new SelectList(_context.Monitor, "Id", "nome", monitorID);
+            ViewData["professorID"] = new SelectList(_context.Professor, "Id", "nome", professorID);
+            return View("Index", listaTurmas);
+        }
+
         // GET: Turmas
         public async Task<IActionResult> Index()
         {
@@ -28,6 +90,7 @@ namespace Projeto_Casa_Criancas.Controllers
             return View(await contexto.ToListAsync());
         }
 
+       
         // GET: Turmas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -95,6 +158,9 @@ namespace Projeto_Casa_Criancas.Controllers
             ViewData["professorID"] = new SelectList(_context.Professor, "Id", "nome", turma.professorID);
             return View(turma);
         }
+
+        
+
 
         // POST: Turmas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -175,4 +241,5 @@ namespace Projeto_Casa_Criancas.Controllers
             return _context.Turma.Any(e => e.Id == id);
         }
     }
+
 }

@@ -83,6 +83,29 @@ namespace Projeto_Casa_Criancas.Controllers
             return View(colaborador);
         }
 
+        public IActionResult FiltrarColaborador(string nome)
+        {
+            List<Colaborador> listaColaboradores;
+
+            if (!string.IsNullOrEmpty(nome))
+            {
+                listaColaboradores = _context.Colaborador
+                    .Where(a => a.nome.Contains(nome))
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+            else
+            {
+                listaColaboradores = _context.Colaborador
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+
+            ViewData["Nome"] = nome;
+
+            return View("Index", listaColaboradores);
+        }
+
         // POST: Colaboradores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

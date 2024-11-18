@@ -5,39 +5,30 @@
     ViewData["Title"] = "Detalhes do Assistente Social";
 }
 
-<h1>Details</h1>
+<h1><i class="bi bi-person-lines-fill"></i>&nbsp;Detalhes do Assistente Social</h1>
 
+<hr />
 <div>
-    <h4>AssistenteSocial</h4>
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cpf)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.cpf)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.endereco)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.endereco)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.celular)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.celular)
-        </dd>
+        <dt class="col-sm-2"><i class="bi bi-person-fill"></i>&nbsp;Nome</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.nome)</dd>
+
+        <dt class="col-sm-2"><i class="bi bi-card-text"></i>&nbsp;CPF</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.cpf)</dd>
+
+        <dt class="col-sm-2"><i class="bi bi-house-door-fill"></i>&nbsp;Endereço</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.endereco)</dd>
+
+        <dt class="col-sm-2"><i class="bi bi-phone-fill"></i>&nbsp;Celular</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.celular)</dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+        <i class="bi bi-pencil-fill"></i>&nbsp;Editar
+    </a>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left-circle"></i>&nbsp;Voltar para a Lista
+    </a>
 </div>
