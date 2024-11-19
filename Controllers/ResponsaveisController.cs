@@ -21,6 +21,29 @@ namespace Projeto_Casa_Criancas.Controllers
             _context = context;
         }
 
+        public IActionResult FiltrarResponsavel(string nome)
+        {
+            List<Responsavel> listaResponsaveis;
+
+            if (!string.IsNullOrEmpty(nome))
+            {
+                listaResponsaveis = _context.Responsavel
+                    .Where(a => a.nome.Contains(nome))
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+            else
+            {
+                listaResponsaveis = _context.Responsavel
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+
+            ViewData["Nome"] = nome;
+
+            return View("Index", listaResponsaveis);
+        }
+
         // GET: Responsaveis
         public async Task<IActionResult> Index()
         {
