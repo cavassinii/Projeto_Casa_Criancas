@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Projeto_Casa_Criancas.Models.Consultas.TurmaGrp>
+
+@{
+    ViewData["Title"] = "AgruparCursoColaboradorTurma";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Relatório de Turmas</h1>
+
+<table class="table table-striped table-hover mt-4">
+    <thead class="table-dark " style="position: sticky; top: 0; z-index: 1;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.curso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.colaborador)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.curso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.colaborador)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

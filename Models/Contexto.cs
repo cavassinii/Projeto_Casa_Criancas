@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Projeto_Casa_Criancas.Models.Consultas;
 
 namespace Projeto_Casa_Criancas.Models
 {
@@ -27,6 +28,8 @@ namespace Projeto_Casa_Criancas.Models
             public DbSet<Turma> Turma { get; set; }
 
             public DbSet<Monitor> Monitor { get; set; }
+            public DbSet<Projeto_Casa_Criancas.Models.Consultas.TurmaGrp> TurmaGrp { get; set; }
+            public DbSet<Projeto_Casa_Criancas.Models.Consultas.MatriculaGrp> MatriculaGrp { get; set; }
 
         }
  }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +9,6 @@ using Projeto_Casa_Criancas.Models;
 
 namespace Projeto_Casa_Criancas.Controllers
 {
-    //[Authorize(Roles = "Admin,Assistente")]
-
     public class CursosController : Controller
     {
         private readonly Contexto _context;
@@ -24,7 +21,8 @@ namespace Projeto_Casa_Criancas.Controllers
         // GET: Cursos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Curso.ToListAsync());
+            var contexto = _context.Curso.Include(c => c.colaborador);
+            return View(await contexto.ToListAsync());
         }
 
         // GET: Cursos/Details/5
@@ -36,6 +34,7 @@ namespace Projeto_Casa_Criancas.Controllers
             }
 
             var curso = await _context.Curso
+                .Include(c => c.colaborador)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (curso == null)
             {
@@ -48,6 +47,7 @@ namespace Projeto_Casa_Criancas.Controllers
         // GET: Cursos/Create
         public IActionResult Create()
         {
+            ViewData["colaboradorID"] = new SelectList(_context.Colaborador, "Id", "nome");
             return View();
         }
 
@@ -64,31 +64,8 @@ namespace Projeto_Casa_Criancas.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["colaboradorID"] = new SelectList(_context.Colaborador, "Id", "nome", curso.colaboradorID);
             return View(curso);
-        }
-
-
-        public IActionResult FiltrarCurso(string nome)
-        {
-            List<Models.Curso> ListaCursos;
-
-            if (!string.IsNullOrEmpty(nome))
-            {
-                ListaCursos = _context.Curso
-                    .Where(a => a.nome.Contains(nome))
-                    .OrderBy(a => a.nome)
-                    .ToList();
-            }
-            else
-            {
-                ListaCursos = _context.Curso
-                    .OrderBy(a => a.nome)
-                    .ToList();
-            }
-
-            ViewData["Nome"] = nome;
-
-            return View("Index", ListaCursos);
         }
 
         // GET: Cursos/Edit/5
