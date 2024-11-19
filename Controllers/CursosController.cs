@@ -24,8 +24,7 @@ namespace Projeto_Casa_Criancas.Controllers
         // GET: Cursos
         public async Task<IActionResult> Index()
         {
-            var contexto = _context.Curso.Include(c => c.colaborador);
-            return View(await contexto.ToListAsync());
+            return View(await _context.Curso.ToListAsync());
         }
 
         // GET: Cursos/Details/5
@@ -37,7 +36,6 @@ namespace Projeto_Casa_Criancas.Controllers
             }
 
             var curso = await _context.Curso
-                .Include(c => c.colaborador)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (curso == null)
             {
@@ -50,7 +48,6 @@ namespace Projeto_Casa_Criancas.Controllers
         // GET: Cursos/Create
         public IActionResult Create()
         {
-            ViewData["colaboradorID"] = new SelectList(_context.Colaborador, "Id", "nome");
             return View();
         }
 
@@ -67,13 +64,33 @@ namespace Projeto_Casa_Criancas.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["colaboradorID"] = new SelectList(_context.Colaborador, "Id", "nome", curso.colaboradorID);
             return View(curso);
         }
 
-        // GET: Cursos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+        public IActionResult FiltrarCurso(string nome)
         {
+            List<Models.Curso> ListaCurso;
+            if (!string.IsNullOrEmpty(nome))
+            {
+                ListaCurso = _context.Curso
+                    .Where(a => a.nome.Contains(nome))
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+            else
+            {
+                ListaCurso = _context.Curso
+                    .OrderBy(a => a.nome)
+                    .ToList();
+            }
+            ViewData["Nome"] = nome;
+            return View("Index", ListaCurso);
+        }
+
+        // GET: Cursos/Edit/5
+        public async Task<IActionResult> Edit(int? id) 
+        { 
             if (id == null)
             {
                 return NotFound();
