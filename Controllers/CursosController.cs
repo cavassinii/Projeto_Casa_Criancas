@@ -70,27 +70,30 @@ namespace Projeto_Casa_Criancas.Controllers
 
         public IActionResult FiltrarCurso(string nome)
         {
-            List<Models.Curso> ListaCurso;
+            List<Models.Curso> ListaCursos;
+
             if (!string.IsNullOrEmpty(nome))
             {
-                ListaCurso = _context.Curso
+                ListaCursos = _context.Curso
                     .Where(a => a.nome.Contains(nome))
                     .OrderBy(a => a.nome)
                     .ToList();
             }
             else
             {
-                ListaCurso = _context.Curso
+                ListaCursos = _context.Curso
                     .OrderBy(a => a.nome)
                     .ToList();
             }
+
             ViewData["Nome"] = nome;
-            return View("Index", ListaCurso);
+
+            return View("Index", ListaCursos);
         }
 
         // GET: Cursos/Edit/5
-        public async Task<IActionResult> Edit(int? id) 
-        { 
+        public async Task<IActionResult> Edit(int? id)
+        {
             if (id == null)
             {
                 return NotFound();
