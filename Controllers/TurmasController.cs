@@ -22,74 +22,43 @@ namespace Projeto_Casa_Criancas.Controllers
             _context = context;
         }
 
-        public IActionResult FiltrarTurmas(string descricao, int? cursoID, int? monitorID, int? professorID)
+
+        public async Task<IActionResult> Index(string descricao = "", int cursoID = 0, int monitorID = 0, int professorID = 0)
         {
             List<Turma> listaTurmas = new List<Turma>();
 
+            var filtro = _context.Turma
+                .Include(c => c.curso)
+                .Include(m => m.monitor)
+                .Include(p => p.professor)
+                .AsQueryable();
+
             if (!string.IsNullOrEmpty(descricao))
             {
-                listaTurmas = _context.Turma
-                    .Include(c => c.curso)
-                    .Include(m => m.monitor)
-                    .Include(p => p.professor)
-                    .Where(a => a.descricao.Contains(descricao))
-                    .OrderBy(a => a.descricao)
-                    .ToList();
+                filtro = filtro.Where(a => a.descricao.Contains(descricao));
+            }
+            if (cursoID != 0)
+            {
+                filtro = filtro.Where(a => a.cursoID == cursoID);
+            }
+            if (monitorID != 0)
+            {
+                filtro = filtro.Where(a => a.monitorID == monitorID);
+            }
+            if (professorID != 0)
+            {
+                filtro = filtro.Where(a => a.professorID == professorID);
             }
 
-            else if (cursoID != null)
-            {
-                listaTurmas = _context.Turma
-                    .Include(c => c.curso)
-                    .Include(m => m.monitor)
-                    .Include(p => p.professor)
-                    .Where(a => a.cursoID == cursoID.Value)
-                    .ToList();
-            }
-
-            else if (monitorID != null)
-            {
-                listaTurmas = _context.Turma
-                    .Include(c => c.curso)
-                    .Include(m => m.monitor)
-                    .Include(p => p.professor)
-                    .Where(t => t.monitorID == monitorID.Value)
-                    .ToList();
-            }
-
-            else if (professorID != null)
-            {
-                listaTurmas = _context.Turma
-                    .Include(c => c.curso)
-                    .Include(m => m.monitor)
-                    .Include(p => p.professor)
-                    .Where(t => t.professorID == professorID.Value)
-                    .ToList();
-            }
-
-            else
-            {
-                listaTurmas = _context.Turma
-                    .Include(c => c.curso)
-                    .Include(m => m.monitor)
-                    .Include(p => p.professor)
-                    .ToList();
-            }
+            listaTurmas = await filtro.OrderBy(a => a.descricao).ToListAsync();
 
             ViewData["descricao"] = descricao;
             ViewData["cursoID"] = new SelectList(_context.Curso, "Id", "nome", cursoID);
             ViewData["monitorID"] = new SelectList(_context.Monitor, "Id", "nome", monitorID);
             ViewData["professorID"] = new SelectList(_context.Professor, "Id", "nome", professorID);
-            return View("Index", listaTurmas);
-        }
 
-        // GET: Turmas
-        public async Task<IActionResult> Index()
-        {
-            var contexto = _context.Turma.Include(t => t.curso).Include(t => t.monitor).Include(t => t.professor);
-            return View(await contexto.ToListAsync());
+            return View(listaTurmas);
         }
-
        
         // GET: Turmas/Details/5
         public async Task<IActionResult> Details(int? id)
