@@ -23,7 +23,7 @@ namespace Projeto_Casa_Criancas.Models
         public DateOnly data { get; set; }
 
         [Display(Name = "Status: ")]
-        public Status status { get; set; }
+        public bool status { get; set; }
 
 
     }

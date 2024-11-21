@@ -22,10 +22,31 @@ namespace Projeto_Casa_Criancas.Controllers
         }
 
         // GET: Chamadas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int cursoID = 0, int monitorID = 0)
         {
-            var contexto = _context.Chamada.Include(c => c.matricula);
-            return View(await contexto.ToListAsync());
+            List<Turma> listaTurmas = new List<Turma>();
+
+            var filtro = _context.Turma
+                .Include(c => c.curso)
+                .Include(m => m.monitor)
+                .Include(p => p.professor)
+                .AsQueryable();
+
+            if (cursoID != 0)
+            {
+                filtro = filtro.Where(a => a.cursoID == cursoID);
+            }
+            if (monitorID != 0)
+            {
+                filtro = filtro.Where(a => a.monitorID == monitorID);
+            }
+
+            listaTurmas = await filtro.OrderBy(a => a.descricao).ToListAsync();
+
+            ViewData["cursoID"] = new SelectList(_context.Curso, "Id", "nome", cursoID);
+            ViewData["monitorID"] = new SelectList(_context.Monitor, "Id", "nome", monitorID);
+
+            return View(listaTurmas);
         }
 
         // GET: Chamadas/Details/5
@@ -72,58 +93,61 @@ namespace Projeto_Casa_Criancas.Controllers
             return View(chamada);
         }
 
-        // GET: Chamadas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // Método GET
+        public async Task<IActionResult> EfetuarChamada(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var chamada = await _context.Chamada.FindAsync(id);
-            if (chamada == null)
+            var turma = await _context.Turma.FindAsync(id);
+            if (turma == null)
             {
                 return NotFound();
             }
-            ViewData["matriculaID"] = new SelectList(_context.Matriculas, "Id", "Id", chamada.matriculaID);
-            return View(chamada);
+
+            var matriculas = await _context.Matriculas
+                .Where(m => m.turmaID == id)
+                .Include(m => m.aluno)
+                .ToListAsync();
+
+            ViewBag.Turma = turma;
+            return View(matriculas); 
         }
 
-        // POST: Chamadas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,matriculaID,data,status")] Chamada chamada)
-        {
-            if (id != chamada.Id)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+        // Método POST
+        [HttpPost]
+        public async Task<IActionResult> EfetuarChamada(int turmaID, Dictionary<int, int> matriculas)
+        {
+            if (matriculas != null && matriculas.Any())
             {
-                try
+                foreach (var item in matriculas)
                 {
-                    _context.Update(chamada);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ChamadaExists(chamada.Id))
+                    var matriculaID = item.Key;
+
+                    // O valor de 'item.Value' será 1 (Presente) ou 0 (Ocioso)
+                    var status = item.Value == 1;  // Converte 1 para true (Presente) e 0 para false (Ocioso)
+
+                    var chamada = new Chamada
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        matriculaID = matriculaID,
+                        status = status,  // O status será true para "Presente" ou false para "Ocioso"
+                        data = DateOnly.FromDateTime(DateTime.Now)
+                    };
+
+                    _context.Chamada.Add(chamada);
                 }
+
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["matriculaID"] = new SelectList(_context.Matriculas, "Id", "Id", chamada.matriculaID);
-            return View(chamada);
+
+            return View();
         }
+
 
         // GET: Chamadas/Delete/5
         public async Task<IActionResult> Delete(int? id)
