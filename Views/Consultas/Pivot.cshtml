@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Projeto_Casa_Criancas.Models.Consultas.PivotMatricula>
+
+@{
+    ViewData["Title"] = "Relatório Matrículas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Quantidade de Matrículas por Ano e Mês</h1>
+
+<br />
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.janeiro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fevereiro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.marco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.abril)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.maio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.junho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.julho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.agosto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.setembro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outubro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.novembro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dezembro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ano)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.janeiro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fevereiro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.marco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.abril)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.maio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.junho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.julho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.agosto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.setembro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.outubro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.novembro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dezembro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Projeto_Casa_Criancas.Models.Consultas.MatriculaAnoMes>
+
+@{
+    ViewData["Title"] = "AgruparMatriculaAnoMes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AgruparMatriculaAnoMes</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantidade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ano)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantidade)
+            </td>
+           
+        </tr>
+}
+    </tbody>
+</table>
