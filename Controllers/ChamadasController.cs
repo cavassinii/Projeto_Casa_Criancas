@@ -22,32 +22,51 @@ namespace Projeto_Casa_Criancas.Controllers
         }
 
         // GET: Chamadas
-        public async Task<IActionResult> Index(int cursoID = 0, int monitorID = 0)
+        public async Task<IActionResult> Index(string descricao, int? cursoID, int? monitorID, int? professorID)
         {
-            List<Turma> listaTurmas = new List<Turma>();
-
-            var filtro = _context.Turma
-                .Include(c => c.curso)
-                .Include(m => m.monitor)
-                .Include(p => p.professor)
+            // Filtra as turmas conforme os parâmetros recebidos
+            var turmas = _context.Turma
+                .Include(t => t.curso)
+                .Include(t => t.monitor)
+                .Include(t => t.professor)
+                .Include(t => t.horarioDasAulas)
                 .AsQueryable();
 
-            if (cursoID != 0)
+            if (!string.IsNullOrEmpty(descricao))
             {
-                filtro = filtro.Where(a => a.cursoID == cursoID);
+                turmas = turmas.Where(t => t.descricao.Contains(descricao));
             }
-            if (monitorID != 0)
+            if (cursoID.HasValue)
             {
-                filtro = filtro.Where(a => a.monitorID == monitorID);
+                turmas = turmas.Where(t => t.cursoID == cursoID);
+            }
+            if (monitorID.HasValue)
+            {
+                turmas = turmas.Where(t => t.monitorID == monitorID);
+            }
+            if (professorID.HasValue)
+            {
+                turmas = turmas.Where(t => t.professorID == professorID);
             }
 
-            listaTurmas = await filtro.OrderBy(a => a.descricao).ToListAsync();
+            // Filtra turmas onde não existem registros de matrículas com chamadas para o dia de hoje
+            DateOnly dataHoje = DateOnly.FromDateTime(DateTime.Now);
+            turmas = turmas.Where(t => !_context.Matriculas
+                .Any(m => m.turmaID == t.Id && m.data == dataHoje));
 
-            ViewData["cursoID"] = new SelectList(_context.Curso, "Id", "nome", cursoID);
-            ViewData["monitorID"] = new SelectList(_context.Monitor, "Id", "nome", monitorID);
+            // Materializa a consulta de turmas
+            var turmasComHorarios = await turmas.ToListAsync();
 
-            return View(listaTurmas);
+            // Preenche as listas para os filtros no ViewBag
+            ViewBag.cursoID = new SelectList(await _context.Curso.ToListAsync(), "Id", "nome", cursoID);
+            ViewBag.monitorID = new SelectList(await _context.Monitor.ToListAsync(), "Id", "nome", monitorID);
+            ViewBag.professorID = new SelectList(await _context.Professor.ToListAsync(), "Id", "nome", professorID);
+
+            // Retorna a lista de turmas filtradas
+            return View(turmasComHorarios);
         }
+
+
 
         // GET: Chamadas/Details/5
         public async Task<IActionResult> Details(int? id)

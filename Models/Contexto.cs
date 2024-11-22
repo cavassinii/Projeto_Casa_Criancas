@@ -33,5 +33,8 @@ namespace Projeto_Casa_Criancas.Models
             public DbSet<Projeto_Casa_Criancas.Models.Consultas.MatriculaAnoMes> MatriculaAnoMes { get; set; }
             public DbSet<Projeto_Casa_Criancas.Models.Consultas.PivotMatricula> PivotMatricula { get; set; }
 
-        }
- }
+
+            public DbSet<HorarioDasAulas> HorarioDasAulas { get; set; }        
+
+    }
+}

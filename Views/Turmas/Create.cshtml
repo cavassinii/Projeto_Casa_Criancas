@@ -7,59 +7,42 @@
 
 <h1><i class="bi bi-person-plus-fill"></i>&nbsp;Adicionar Turma</h1>
 
-<hr/>
+<hr />
 <div class="col-md-4">
-    <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form method="post" asp-action="Create">
+        @Html.AntiForgeryToken()
 
-            <div class="form-group mb-3">
-                <label asp-for="cursoID" class="control-label">
-                <i class="bi bi-mortarboard-fill"></i>&nbsp;Curso
-                </label>
-                <select asp-for="cursoID" class="form-control" asp-items="ViewBag.cursoID"></select>
-            </div>
+        <div class="form-group">
+            <label for="cursoID">Curso</label>
+            <select asp-for="cursoID" class="form-control" asp-items="ViewBag.cursoID"></select>
+        </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="monitorID" class="control-label">
-                    <i class="bi bi-person-fill"></i>&nbsp;Monitor
-                </label>
-                <select asp-for="monitorID" class ="form-control" asp-items="ViewBag.monitorID"></select>
-            </div>
+        <div class="form-group">
+            <label for="monitorID">Monitor</label>
+            <select asp-for="monitorID" class="form-control" asp-items="ViewBag.monitorID"></select>
+        </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="professorID" class="control-label">
-                    <i class="bi bi-person-fill"></i>&nbsp;Professor
-                </label>
-                <select asp-for="professorID" class ="form-control" asp-items="ViewBag.professorID"></select>
-            </div>
+        <div class="form-group">
+            <label for="professorID">Professor</label>
+            <select asp-for="professorID" class="form-control" asp-items="ViewBag.professorID"></select>
+        </div>
+        <div class="form-group">
+            <label for="horarioDasAulasID">Horário das Aulas</label>
+            <select asp-for="horarioDasAulasID" class="form-control" asp-items="ViewBag.HorarioDasAulasID"></select>
+        </div>
 
-              <div class="form-group mb-3">
-            <label asp-for="descricao" class="control-label">
-                <i class="bi bi-file-earmark-text-fill"></i>&nbsp;Descrição
-            </label>
-            <input asp-for="descricao" class="form-control" placeholder="Digite a descrição" />
-            <span asp-validation-for="descricao" class="text-danger"></span>
-            </div>
+        <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <input type="text" asp-for="descricao" class="form-control" />
+        </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="dataHora" class="control-label">
-                     <i class="bi bi-calendar-event-fill"></i>&nbsp;Data e Hora
-                </label>
-            <input asp-for="dataHora" class="form-control" placeholder="Digite a data e a hora" />
-                <span asp-validation-for="dataHora" class="text-danger"></span>
-            </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
 
-            <div class="form-group">
-            <button type="submit" class="btn btn-success">
-                <i class="bi bi-check-circle-fill"></i>&nbsp;Adicionar
-            </button>
-            <a asp-action="Index" class="btn btn-outline-secondary">
-                <i class="bi bi-arrow-left-circle"></i>&nbsp;Voltar para a Lista
-            </a>
-            </div>
-        </form>
-    </div>
+</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -23,43 +23,43 @@ namespace Projeto_Casa_Criancas.Controllers
         }
 
 
-        public async Task<IActionResult> Index(string descricao = "", int cursoID = 0, int monitorID = 0, int professorID = 0)
+        // GET: Turmas/Index
+        public async Task<IActionResult> Index(string descricao, int? cursoID, int? monitorID, int? professorID)
         {
-            List<Turma> listaTurmas = new List<Turma>();
-
-            var filtro = _context.Turma
-                .Include(c => c.curso)
-                .Include(m => m.monitor)
-                .Include(p => p.professor)
+            // Filtra as turmas conforme os parâmetros recebidos
+            var turmas = _context.Turma
+                .Include(t => t.curso)
+                .Include(t => t.monitor)
+                .Include(t => t.professor)
+                .Include(t => t.horarioDasAulas)
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(descricao))
             {
-                filtro = filtro.Where(a => a.descricao.Contains(descricao));
+                turmas = turmas.Where(t => t.descricao.Contains(descricao));
             }
-            if (cursoID != 0)
+            if (cursoID.HasValue)
             {
-                filtro = filtro.Where(a => a.cursoID == cursoID);
+                turmas = turmas.Where(t => t.cursoID == cursoID);
             }
-            if (monitorID != 0)
+            if (monitorID.HasValue)
             {
-                filtro = filtro.Where(a => a.monitorID == monitorID);
+                turmas = turmas.Where(t => t.monitorID == monitorID);
             }
-            if (professorID != 0)
+            if (professorID.HasValue)
             {
-                filtro = filtro.Where(a => a.professorID == professorID);
+                turmas = turmas.Where(t => t.professorID == professorID);
             }
 
-            listaTurmas = await filtro.OrderBy(a => a.descricao).ToListAsync();
+            // Preenche as listas para os filtros no ViewBag
+            ViewBag.cursoID = new SelectList(await _context.Curso.ToListAsync(), "Id", "nome", cursoID);
+            ViewBag.monitorID = new SelectList(await _context.Monitor.ToListAsync(), "Id", "nome", monitorID);
+            ViewBag.professorID = new SelectList(await _context.Professor.ToListAsync(), "Id", "nome", professorID);
 
-            ViewData["descricao"] = descricao;
-            ViewData["cursoID"] = new SelectList(_context.Curso, "Id", "nome", cursoID);
-            ViewData["monitorID"] = new SelectList(_context.Monitor, "Id", "nome", monitorID);
-            ViewData["professorID"] = new SelectList(_context.Professor, "Id", "nome", professorID);
-
-            return View(listaTurmas);
+            return View(await turmas.ToListAsync());
         }
-       
+
+
         // GET: Turmas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -84,30 +84,73 @@ namespace Projeto_Casa_Criancas.Controllers
         // GET: Turmas/Create
         public IActionResult Create()
         {
+            // Obtendo os horários formatados no formato desejado
+            var horarios = _context.HorarioDasAulas
+                .Select(h => new
+                {
+                    h.Id,
+                    HorarioDescricao = $"{h.DiaDaSemana} - {h.HoraInicio} às {h.HoraFim}"
+                }).ToList();
+
+            // Preenchendo os SelectLists
             ViewData["cursoID"] = new SelectList(_context.Curso, "Id", "nome");
             ViewData["monitorID"] = new SelectList(_context.Monitor, "Id", "nome");
             ViewData["professorID"] = new SelectList(_context.Professor, "Id", "nome");
+
+            // Adicionando a lista de horários formatados na ViewData
+            ViewData["horarioDasAulasID"] = new SelectList(horarios, "Id", "HorarioDescricao");
+
             return View();
         }
+
 
         // POST: Turmas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,cursoID,monitorID,professorID,descricao,dataHora")] Turma turma)
+        public async Task<IActionResult> Create([Bind("Id,cursoID,monitorID,professorID,descricao,horarioDasAulasID")] Turma turma)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(turma);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    // Adicionando a turma ao contexto
+                    _context.Add(turma);
+                    await _context.SaveChangesAsync();
+
+                    // Redireciona para a página de index
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    // Caso ocorra algum erro ao salvar, você pode registrar ou logar a exceção
+                    // Por exemplo: _logger.LogError(ex, "Erro ao salvar a turma.");
+
+                    // Se der erro, pode exibir uma mensagem de erro
+                    ModelState.AddModelError(string.Empty, "Ocorreu um erro ao salvar a turma. Tente novamente.");
+                }
             }
+
+            // Se não for válido, repopula os campos de seleção
+            var horarios = _context.HorarioDasAulas
+                .Select(h => new
+                {
+                    h.Id,
+                    HorarioDescricao = $"{h.DiaDaSemana} - {h.HoraInicio} às {h.HoraFim}"
+                }).ToList();
+
+            // Repopula as listas com os dados atuais
             ViewData["cursoID"] = new SelectList(_context.Curso, "Id", "nome", turma.cursoID);
             ViewData["monitorID"] = new SelectList(_context.Monitor, "Id", "nome", turma.monitorID);
             ViewData["professorID"] = new SelectList(_context.Professor, "Id", "nome", turma.professorID);
+            ViewData["horarioDasAulasID"] = new SelectList(horarios, "Id", "HorarioDescricao", turma.horarioDasAulasID);
+
+            // Retorna a view com a turma que contém erros
             return View(turma);
         }
+
+
 
         // GET: Turmas/Edit/5
         public async Task<IActionResult> Edit(int? id)

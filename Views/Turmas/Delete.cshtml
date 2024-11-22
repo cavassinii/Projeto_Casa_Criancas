@@ -1,4 +1,4 @@
-﻿@model Projeto_Casa_Criancas.Models.Turma
+﻿ @model Projeto_Casa_Criancas.Models.Turma
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -38,13 +38,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.descricao)
-        </dd>
-
-        <dt class="col-sm-2">
-            <i class="bi bi-calendar-event-fill"></i>&nbsp;@Html.DisplayNameFor(model => model.dataHora)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.dataHora)
         </dd>
     </dl>
 

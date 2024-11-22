@@ -14,38 +14,37 @@
 </p>
 
 <form method="get" asp-action="Index" class="mb-3">
-    <div class="row mb-6">
-        <div class="col-md-6 mb-3">
-            <label for="descricao">Filtrar por Descrição:</label>
-            <input type="text" name="descricao" id="descricao" class="form-control" placeholder="Digite a descrição" value="@ViewData["descricao"]" />
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <label for="descricao">Descrição:</label>
+            <input type="text" name="descricao" id="descricao" class="form-control" placeholder="Digite a descrição"
+                   value="@ViewData["descricao"]" />
         </div>
 
-        <div class="col-md-6 mb-3">
-            <label for="cursoID">Filtrar por Curso:</label>
+        <div class="col-md-3 mb-3">
+            <label for="cursoID">Curso:</label>
             <select name="cursoID" id="cursoID" class="form-select" asp-items="ViewBag.cursoID">
                 <option value="">Todos</option>
             </select>
         </div>
-    </div>
 
-    <div class="row mb-3">
-        <div class="col-md-6 mb-3">
-            <label for="monitorID">Filtrar por Monitor:</label>
+        <div class="col-md-3 mb-3">
+            <label for="monitorID">Monitor:</label>
             <select name="monitorID" id="monitorID" class="form-select" asp-items="ViewBag.monitorID">
                 <option value="">Todos</option>
             </select>
         </div>
 
-        <div class="col-md-6 mb-3">
-            <label for="professorID">Filtrar por Professor:</label>
+        <div class="col-md-3 mb-3">
+            <label for="professorID">Professor:</label>
             <select name="professorID" id="professorID" class="form-select" asp-items="ViewBag.professorID">
                 <option value="">Todos</option>
             </select>
         </div>
     </div>
 
-    <div class="mt-2">
-        <button type="submit" class="btn btn-primary w-100">
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">
             <i class="bi bi-search"></i> Pesquisar
         </button>
     </div>
@@ -54,34 +53,53 @@
 <table class="table table-striped table-hover mt-3">
     <thead class="table-dark">
         <tr>
-            <th><i class="bi bi-mortarboard-fill"></i> @Html.DisplayNameFor(model => model.curso)</th>
-            <th><i class="bi bi-person-fill"></i> @Html.DisplayNameFor(model => model.monitor)</th>
-            <th><i class="bi bi-person-fill"></i> @Html.DisplayNameFor(model => model.professor)</th>
-            <th><i class="bi bi-file-earmark-text-fill"></i> @Html.DisplayNameFor(model => model.descricao)</th>
-            <th><i class="bi bi-calendar-event-fill"></i> @Html.DisplayNameFor(model => model.dataHora)</th>
-            <th><i class="bi bi-gear-fill"></i> Ações</th>
+            <th>Curso</th>
+            <th>Monitor</th>
+            <th>Professor</th>
+            <th>Descrição</th>
+            <th>Horário</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.curso.nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.monitor.nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.professor.nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.descricao)</td>
-            <td>@Html.DisplayFor(modelItem => item.dataHora)</td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary me-1">
-                        <i class="bi bi-pencil-square"></i> Editar
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1">
-                        <i class="bi bi-eye-fill"></i> Detalhes
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
-                        <i class="bi bi-trash-fill"></i> Excluir
-                    </a>
-            </td>
-        </tr>
-}
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6" class="text-center text-muted">Nenhuma turma encontrada.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.curso?.nome</td>
+                    <td>@item.monitor?.nome</td>
+                    <td>@item.professor?.nome</td>
+                    <td>@item.descricao</td>
+                    <td>
+                        @if (item.horarioDasAulas != null)
+                        {
+                            @($"{item.horarioDasAulas.DiaDaSemana} - {item.horarioDasAulas.HoraInicio} às {item.horarioDasAulas.HoraFim}")
+                        }
+                        else
+                        {
+                            <span class="text-muted">Não definido</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary me-1">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1">
+                            <i class="bi bi-eye-fill"></i> Detalhes
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash-fill"></i> Excluir
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>
