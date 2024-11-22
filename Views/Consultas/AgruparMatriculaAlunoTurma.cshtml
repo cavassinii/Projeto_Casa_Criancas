@@ -5,13 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>AgruparMatriculaAlunoTurma</h1>
+<h1>Relatório de Matrículas</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+<table class="table table-striped table-hover mt-4">
+    <thead class="table-dark " style="position: sticky; top: 0; z-index: 1;">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.id)
@@ -42,11 +39,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.qtdeAluno)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
             </td>
         </tr>
 }
