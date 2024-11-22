@@ -111,7 +111,32 @@ namespace Projeto_Casa_Criancas.Controllers
 
         }
 
-       
+        public IActionResult AgruparColaboradorCurso()
+        {
+            IEnumerable<ColaboradorGrp> lstGrupoColaborador = from item in contexto.Curso
+                                   .Include(c => c.colaborador)
+                                   .ToList()
+                                                              let colaboradorId = item.colaborador.Id
+                                                              let colaboradorNome = item.colaborador.nome
+                                                              let cursoNome = item.nome
+                                                              let cursoDescricao = item.descricao
+
+                                                              group item by new { colaboradorId, colaboradorNome, cursoNome, cursoDescricao, }
+                                   into grupo
+                                                              orderby grupo.Key.colaboradorId, grupo.Key.colaboradorNome, grupo.Key.cursoNome, grupo.Key.cursoDescricao
+                                                              select new ColaboradorGrp
+                                                              {
+                                                                  id = grupo.Key.colaboradorId,
+                                                                  colaboradorNome = grupo.Key.colaboradorNome,
+                                                                  cursoNome = grupo.Key.cursoNome,
+                                                                  cursoDescricao = grupo.Key.cursoDescricao,
+                                                              };
+
+            return View(lstGrupoColaborador);
+
+        }
+
+
 
         public IActionResult Pivot()
         {

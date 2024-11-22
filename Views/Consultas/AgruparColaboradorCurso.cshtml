@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Projeto_Casa_Criancas.Models.Consultas.ColaboradorGrp>
+
+@{
+    ViewData["Title"] = "AgruparColaboradorCurso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Relatório de Colaboradores</h1>
+
+<table class="table table-striped table-hover mt-4">
+    <thead class="table-dark " style="position: sticky; top: 0; z-index: 1;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.colaboradorNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cursoNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cursoDescricao)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.colaboradorNome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cursoNome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cursoDescricao)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

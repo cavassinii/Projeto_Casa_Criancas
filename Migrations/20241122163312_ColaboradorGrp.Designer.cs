@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projeto_Casa_Criancas.Models;
 
@@ -11,9 +12,11 @@ using Projeto_Casa_Criancas.Models;
 namespace Projeto_Casa_Criancas.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20241122163312_ColaboradorGrp")]
+    partial class ColaboradorGrp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -316,35 +319,6 @@ namespace Projeto_Casa_Criancas.Migrations
                     b.ToTable("Cursos");
                 });
 
-            modelBuilder.Entity("Projeto_Casa_Criancas.Models.HorarioDasAulas", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Abreviacao")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("DiaDaSemana")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("HoraFim")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("HoraInicio")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("HorarioDasAulas");
-                });
-
             modelBuilder.Entity("Projeto_Casa_Criancas.Models.Matricula", b =>
                 {
                     b.Property<int>("Id")
@@ -468,32 +442,30 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("cursoId")
+                    b.Property<int>("cursoID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("dataHora")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("descricao")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<int>("horarioDasAulasID")
+                    b.Property<int>("monitorID")
                         .HasColumnType("int");
 
-                    b.Property<int>("monitorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("professorId")
+                    b.Property<int>("professorID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("cursoId");
+                    b.HasIndex("cursoID");
 
-                    b.HasIndex("horarioDasAulasID");
+                    b.HasIndex("monitorID");
 
-                    b.HasIndex("monitorId");
-
-                    b.HasIndex("professorId");
+                    b.HasIndex("professorID");
 
                     b.ToTable("Turmas");
                 });
@@ -625,31 +597,23 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     b.HasOne("Projeto_Casa_Criancas.Models.Curso", "curso")
                         .WithMany()
-                        .HasForeignKey("cursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Projeto_Casa_Criancas.Models.HorarioDasAulas", "horarioDasAulas")
-                        .WithMany()
-                        .HasForeignKey("horarioDasAulasID")
+                        .HasForeignKey("cursoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Projeto_Casa_Criancas.Models.Monitor", "monitor")
                         .WithMany()
-                        .HasForeignKey("monitorId")
+                        .HasForeignKey("monitorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Projeto_Casa_Criancas.Models.Professor", "professor")
                         .WithMany()
-                        .HasForeignKey("professorId")
+                        .HasForeignKey("professorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("curso");
-
-                    b.Navigation("horarioDasAulas");
 
                     b.Navigation("monitor");
 

@@ -28,6 +28,8 @@ namespace Projeto_Casa_Criancas.Models
             public DbSet<Turma> Turma { get; set; }
 
             public DbSet<Monitor> Monitor { get; set; }
+
+            public DbSet<Projeto_Casa_Criancas.Models.Consultas.ColaboradorGrp> ColaboradorGrp { get; set; }
             public DbSet<Projeto_Casa_Criancas.Models.Consultas.TurmaGrp> TurmaGrp { get; set; }
             public DbSet<Projeto_Casa_Criancas.Models.Consultas.MatriculaGrp> MatriculaGrp { get; set; }
             public DbSet<Projeto_Casa_Criancas.Models.Consultas.MatriculaAnoMes> MatriculaAnoMes { get; set; }
