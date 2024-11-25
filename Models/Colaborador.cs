@@ -11,17 +11,17 @@ namespace Projeto_Casa_Criancas.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Campo nome é obrigatório")]
-        [StringLength(35)]
+        [StringLength(100)]
         [Display(Name = "Nome: ")]
         public String nome { get; set; }
 
         [Required(ErrorMessage = "Campo CNPJ é obrigatório")]
-        [StringLength(14)]
+        [StringLength(25)]
         [Display(Name = "CNPJ: ")]
         public String cnpj { get; set; }
 
         [Required(ErrorMessage = "Campo endereço é obrigatório")]
-        [StringLength(50)]
+        [StringLength(200)]
         [Display(Name = "Endereço: ")]
         public String endereco { get; set; }
 

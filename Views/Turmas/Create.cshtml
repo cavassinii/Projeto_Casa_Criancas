@@ -5,40 +5,62 @@
     ViewData["Title"] = "Adicionar Turma";
 }
 
-<h1><i class="bi bi-person-plus-fill"></i>&nbsp;Adicionar Turma</h1>
+<h1><i class="bi bi-journal-plus"></i>&nbsp;Adicionar Turma</h1>
 
 <hr />
 <div class="col-md-4">
     <form method="post" asp-action="Create">
         @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            <label for="cursoID">Curso</label>
+        <div class="form-group mb-3">
+            <label asp-for="cursoID" class="control-label">
+                <i class="bi bi-book-fill"></i>&nbsp;Curso
+            </label>
             <select asp-for="cursoID" class="form-control" asp-items="ViewBag.cursoID"></select>
+            <span asp-validation-for="cursoID" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label for="monitorID">Monitor</label>
+        <div class="form-group mb-3">
+            <label asp-for="monitorID" class="control-label">
+                <i class="bi bi-people-fill"></i>&nbsp;Monitor
+            </label>
             <select asp-for="monitorID" class="form-control" asp-items="ViewBag.monitorID"></select>
+            <span asp-validation-for="monitorID" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label for="professorID">Professor</label>
+        <div class="form-group mb-3">
+            <label asp-for="professorID" class="control-label">
+                <i class="bi bi-person-fill"></i>&nbsp;Professor
+            </label>
             <select asp-for="professorID" class="form-control" asp-items="ViewBag.professorID"></select>
+            <span asp-validation-for="professorID" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label for="horarioDasAulasID">Horário das Aulas</label>
+
+        <div class="form-group mb-3">
+            <label asp-for="horarioDasAulasID" class="control-label">
+                <i class="bi bi-clock-fill"></i>&nbsp;Horário das Aulas
+            </label>
             <select asp-for="horarioDasAulasID" class="form-control" asp-items="ViewBag.HorarioDasAulasID"></select>
+            <span asp-validation-for="horarioDasAulasID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="descricao" class="control-label">
+                <i class="bi bi-info-circle-fill"></i>&nbsp;Descrição
+            </label>
+            <input asp-for="descricao" class="form-control" placeholder="Digite uma descrição" />
+            <span asp-validation-for="descricao" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label for="descricao">Descrição</label>
-            <input type="text" asp-for="descricao" class="form-control" />
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-check-circle-fill"></i>&nbsp;Salvar
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left-circle"></i>&nbsp;Voltar para a Lista
+            </a>
         </div>
-
-        <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
-
 </div>
 
 @section Scripts {

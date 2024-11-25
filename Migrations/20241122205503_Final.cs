@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Projeto_Casa_Criancas.Migrations
 {
     /// <inheritdoc />
-    public partial class AAAAAAAA : Migration
+    public partial class Final : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,9 +17,9 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
-                    cpf = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    endereco = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    cpf = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    endereco = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     celular = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -33,14 +33,29 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
-                    cnpj = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    endereco = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    cnpj = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    endereco = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     celular = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Colaboradores", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ColaboradorGrp",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    colaboradorNome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    cursoNome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    cursoDescricao = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ColaboradorGrp", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,9 +110,9 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
-                    cpf = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    endereco = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    cpf = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    endereco = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     celular = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -137,9 +152,9 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
-                    cpf = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    endereco = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    cpf = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    endereco = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     celular = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -153,7 +168,7 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
+                    nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     celular = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -202,9 +217,9 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
+                    nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     data = table.Column<DateOnly>(type: "date", nullable: false),
-                    endereco = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    endereco = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     celular = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     responsavelID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -225,9 +240,9 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cursoId = table.Column<int>(type: "int", nullable: false),
-                    monitorId = table.Column<int>(type: "int", nullable: false),
-                    professorId = table.Column<int>(type: "int", nullable: false),
+                    cursoID = table.Column<int>(type: "int", nullable: false),
+                    monitorID = table.Column<int>(type: "int", nullable: false),
+                    professorID = table.Column<int>(type: "int", nullable: false),
                     descricao = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     horarioDasAulasID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -235,8 +250,8 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     table.PrimaryKey("PK_Turmas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Turmas_Cursos_cursoId",
-                        column: x => x.cursoId,
+                        name: "FK_Turmas_Cursos_cursoID",
+                        column: x => x.cursoID,
                         principalTable: "Cursos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -247,14 +262,14 @@ namespace Projeto_Casa_Criancas.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Turmas_Monitores_monitorId",
-                        column: x => x.monitorId,
+                        name: "FK_Turmas_Monitores_monitorID",
+                        column: x => x.monitorID,
                         principalTable: "Monitores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Turmas_Professores_professorId",
-                        column: x => x.professorId,
+                        name: "FK_Turmas_Professores_professorID",
+                        column: x => x.professorID,
                         principalTable: "Professores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -372,9 +387,9 @@ namespace Projeto_Casa_Criancas.Migrations
                 column: "turmaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turmas_cursoId",
+                name: "IX_Turmas_cursoID",
                 table: "Turmas",
-                column: "cursoId");
+                column: "cursoID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Turmas_horarioDasAulasID",
@@ -382,14 +397,14 @@ namespace Projeto_Casa_Criancas.Migrations
                 column: "horarioDasAulasID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turmas_monitorId",
+                name: "IX_Turmas_monitorID",
                 table: "Turmas",
-                column: "monitorId");
+                column: "monitorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turmas_professorId",
+                name: "IX_Turmas_professorID",
                 table: "Turmas",
-                column: "professorId");
+                column: "professorID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Visitas_alunoID",
@@ -407,6 +422,9 @@ namespace Projeto_Casa_Criancas.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Chamadas");
+
+            migrationBuilder.DropTable(
+                name: "ColaboradorGrp");
 
             migrationBuilder.DropTable(
                 name: "MatriculaAnoMes");

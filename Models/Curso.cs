@@ -11,12 +11,12 @@ namespace Projeto_Casa_Criancas.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Campo nome é obrigatório")]
-        [StringLength(35)]
+        [StringLength(50)]
         [Display(Name = "Nome: ")]
         public String nome { get; set; }
 
         [Required(ErrorMessage = "Campo descrição é obrigatório")]
-        [StringLength(40)]
+        [StringLength(200)]
         [Display(Name = "Descrição: ")]
         public String descricao { get; set; }
 

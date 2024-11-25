@@ -10,7 +10,7 @@ using Projeto_Casa_Criancas.Models;
 
 namespace Projeto_Casa_Criancas.Controllers
 {
-    //[Authorize(Roles = "Admin,Assistente")]
+    [Authorize(Roles = "Admin,Assistente")]
 
     public class ColaboradoresController : Controller
     {

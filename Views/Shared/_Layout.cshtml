@@ -112,32 +112,23 @@
                                         <a class="nav-link px-0" asp-controller="Consultas" asp-action="Pivot"> <span class="d-none d-sm-inline">Matrículas Anual/Mensal </span>  </a>
                                     </li>
                                </ul>
+                            
                             </li>
-                            <li>
-                                <a asp-controller="Chamadas" asp-action="Index" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi bi-check-circle"></i> <span class="ms-1 d-none d-sm-inline">Chamadas</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
 
-                    <div class="dropdown pb-4" style="cursor:pointer;">
-                        <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="d-none d-sm-inline mx-1 ">@User.Identity?.Name</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" style="cursor:pointer;">
-                            <li>
-                                <a class="dropdown-item bi bi-person-circle" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> Conta</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li class="dropdown-item" style="cursor:pointer;">
-                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("IndexPrincipal", "Home", new { area = "" })">
-                                    <button type="submit" class="nav-link btn btn-link text-white bi bi-box-arrow-left"> Sair</button>
-                                </form>
-                            </li>
+                        <li>
+                            <a asp-controller="Chamadas" asp-action="Index" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi bi-check-circle"></i> <span class="ms-1 d-none d-sm-inline">Chamadas</span>
+                            </a>
+                        </li>
                         </ul>
+
+                    <form class="mt-auto text-center w-100" asp-area="Identity" asp-page="/Account/Logout"
+                          asp-route-returnUrl="@Url.Action("IndexPrincipal", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-white bi bi-box-arrow-left">
+                            Sair
+                        </button>
+                    </form>
+                        
                     </div>
                 </div>
 

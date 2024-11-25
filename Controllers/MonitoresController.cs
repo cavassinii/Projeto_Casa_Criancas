@@ -12,7 +12,7 @@ using ProjetoMonitor = Projeto_Casa_Criancas.Models.Monitor;
 
 namespace Projeto_Casa_Criancas.Controllers
 {
-    //[Authorize(Roles = "Admin,Assistente")]
+    [Authorize(Roles = "Admin,Assistente")]
 
     public class MonitoresController : Controller
     {

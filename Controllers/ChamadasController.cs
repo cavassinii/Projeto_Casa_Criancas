@@ -10,7 +10,7 @@ using Projeto_Casa_Criancas.Models;
 
 namespace Projeto_Casa_Criancas.Controllers
 {
-    //[Authorize(Roles ="Monitor,Admin,Assistente")]
+    [Authorize(Roles ="Monitor,Admin,Assistente")]
 
     public class ChamadasController : Controller
     {
@@ -24,7 +24,6 @@ namespace Projeto_Casa_Criancas.Controllers
         // GET: Chamadas
         public async Task<IActionResult> Index(string descricao, int? cursoID, int? monitorID, int? professorID)
         {
-            // Filtra as turmas conforme os parâmetros recebidos
             var turmas = _context.Turma
                 .Include(t => t.curso)
                 .Include(t => t.monitor)
@@ -49,20 +48,16 @@ namespace Projeto_Casa_Criancas.Controllers
                 turmas = turmas.Where(t => t.professorID == professorID);
             }
 
-            // Filtra turmas onde não existem registros de matrículas com chamadas para o dia de hoje
             DateOnly dataHoje = DateOnly.FromDateTime(DateTime.Now);
             turmas = turmas.Where(t => !_context.Matriculas
                 .Any(m => m.turmaID == t.Id && m.data == dataHoje));
 
-            // Materializa a consulta de turmas
             var turmasComHorarios = await turmas.ToListAsync();
 
-            // Preenche as listas para os filtros no ViewBag
             ViewBag.cursoID = new SelectList(await _context.Curso.ToListAsync(), "Id", "nome", cursoID);
             ViewBag.monitorID = new SelectList(await _context.Monitor.ToListAsync(), "Id", "nome", monitorID);
             ViewBag.professorID = new SelectList(await _context.Professor.ToListAsync(), "Id", "nome", professorID);
 
-            // Retorna a lista de turmas filtradas
             return View(turmasComHorarios);
         }
 
@@ -146,13 +141,12 @@ namespace Projeto_Casa_Criancas.Controllers
                 {
                     var matriculaID = item.Key;
 
-                    // O valor de 'item.Value' será 1 (Presente) ou 0 (Ocioso)
-                    var status = item.Value == 1;  // Converte 1 para true (Presente) e 0 para false (Ocioso)
+                    var status = item.Value == 1;  
 
                     var chamada = new Chamada
                     {
                         matriculaID = matriculaID,
-                        status = status,  // O status será true para "Presente" ou false para "Ocioso"
+                        status = status,  
                         data = DateOnly.FromDateTime(DateTime.Now)
                     };
 

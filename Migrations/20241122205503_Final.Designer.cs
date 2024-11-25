@@ -12,8 +12,8 @@ using Projeto_Casa_Criancas.Models;
 namespace Projeto_Casa_Criancas.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20241122163312_ColaboradorGrp")]
-    partial class ColaboradorGrp
+    [Migration("20241122205503_Final")]
+    partial class Final
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,13 +43,13 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("responsavelID")
                         .HasColumnType("int");
@@ -76,18 +76,18 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("cpf")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -133,18 +133,18 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("cnpj")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -319,6 +319,35 @@ namespace Projeto_Casa_Criancas.Migrations
                     b.ToTable("Cursos");
                 });
 
+            modelBuilder.Entity("Projeto_Casa_Criancas.Models.HorarioDasAulas", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Abreviacao")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("DiaDaSemana")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("HoraFim")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("HoraInicio")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HorarioDasAulas");
+                });
+
             modelBuilder.Entity("Projeto_Casa_Criancas.Models.Matricula", b =>
                 {
                     b.Property<int>("Id")
@@ -360,18 +389,18 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("cpf")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -393,18 +422,18 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("cpf")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -426,8 +455,8 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -445,13 +474,13 @@ namespace Projeto_Casa_Criancas.Migrations
                     b.Property<int>("cursoID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("dataHora")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("descricao")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
+
+                    b.Property<int>("horarioDasAulasID")
+                        .HasColumnType("int");
 
                     b.Property<int>("monitorID")
                         .HasColumnType("int");
@@ -462,6 +491,8 @@ namespace Projeto_Casa_Criancas.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("cursoID");
+
+                    b.HasIndex("horarioDasAulasID");
 
                     b.HasIndex("monitorID");
 
@@ -601,6 +632,12 @@ namespace Projeto_Casa_Criancas.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Projeto_Casa_Criancas.Models.HorarioDasAulas", "horarioDasAulas")
+                        .WithMany()
+                        .HasForeignKey("horarioDasAulasID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Projeto_Casa_Criancas.Models.Monitor", "monitor")
                         .WithMany()
                         .HasForeignKey("monitorID")
@@ -614,6 +651,8 @@ namespace Projeto_Casa_Criancas.Migrations
                         .IsRequired();
 
                     b.Navigation("curso");
+
+                    b.Navigation("horarioDasAulas");
 
                     b.Navigation("monitor");
 

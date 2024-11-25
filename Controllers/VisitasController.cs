@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -10,6 +11,8 @@ using Projeto_Casa_Criancas.Models;
 
 namespace Projeto_Casa_Criancas.Controllers
 {
+    [Authorize(Roles = "Admin,Assistente")]
+
     public class VisitasController : Controller
     {
         private readonly Contexto _context;

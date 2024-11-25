@@ -6,9 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using Projeto_Casa_Criancas.Extra;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Projeto_Casa_Criancas.Controllers
 {
+    [Authorize(Roles = "Admin,Assistente")]
+
     public class ConsultasController : Controller
     {
 

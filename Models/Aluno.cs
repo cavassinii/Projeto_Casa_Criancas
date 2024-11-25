@@ -12,7 +12,7 @@ namespace Projeto_Casa_Criancas.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Campo nome é obrigatório")]
-        [StringLength(35)]
+        [StringLength(50)]
         [Display(Name = "Nome: ")]
         public String nome { get; set; }
 
@@ -21,7 +21,7 @@ namespace Projeto_Casa_Criancas.Models
         public DateOnly data { get; set; }
 
         [Required(ErrorMessage = "Campo endereço é obrigatório")]
-        [StringLength(50)]
+        [StringLength(200)]
         [Display(Name = "Endereço: ")]
         public String endereco { get; set; }
 
@@ -32,7 +32,7 @@ namespace Projeto_Casa_Criancas.Models
 
         
         [Display(Name = "Responsável: ")]
-        [StringLength(35)]
+        [StringLength(50)]
         public Responsavel responsavel { get; set; }
 
         [Required(ErrorMessage = "Campo responsável é obrigatório")]

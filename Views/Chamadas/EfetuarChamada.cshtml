@@ -60,10 +60,14 @@
             };
 
             // Função para verificar se todos os alunos têm presença ou ociosidade marcada
-            const verificarPreenchimentoChamada = () => {
-                const radios = matriculasTable.querySelectorAll("input[type='radio']");
-                return Array.from(radios).every(radio => radio.checked);
-            };
+                    const verificarPreenchimentoChamada = () => {
+            const rows = matriculasTable.querySelectorAll("tbody tr");
+            return Array.from(rows).every(row => {
+                const radios = row.querySelectorAll("input[type='radio']");
+                return Array.from(radios).some(radio => radio.checked);
+            });
+        };
+
 
             // Inicializa a validação
             const validarChamada = () => {

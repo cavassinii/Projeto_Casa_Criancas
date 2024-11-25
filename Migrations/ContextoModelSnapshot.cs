@@ -40,13 +40,13 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("responsavelID")
                         .HasColumnType("int");
@@ -73,18 +73,18 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("cpf")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -130,18 +130,18 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("cnpj")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -301,13 +301,13 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("descricao")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -386,18 +386,18 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("cpf")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -419,18 +419,18 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("cpf")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("endereco")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -452,8 +452,8 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -468,7 +468,7 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("cursoId")
+                    b.Property<int>("cursoID")
                         .HasColumnType("int");
 
                     b.Property<string>("descricao")
@@ -479,21 +479,21 @@ namespace Projeto_Casa_Criancas.Migrations
                     b.Property<int>("horarioDasAulasID")
                         .HasColumnType("int");
 
-                    b.Property<int>("monitorId")
+                    b.Property<int>("monitorID")
                         .HasColumnType("int");
 
-                    b.Property<int>("professorId")
+                    b.Property<int>("professorID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("cursoId");
+                    b.HasIndex("cursoID");
 
                     b.HasIndex("horarioDasAulasID");
 
-                    b.HasIndex("monitorId");
+                    b.HasIndex("monitorID");
 
-                    b.HasIndex("professorId");
+                    b.HasIndex("professorID");
 
                     b.ToTable("Turmas");
                 });
@@ -625,7 +625,7 @@ namespace Projeto_Casa_Criancas.Migrations
                 {
                     b.HasOne("Projeto_Casa_Criancas.Models.Curso", "curso")
                         .WithMany()
-                        .HasForeignKey("cursoId")
+                        .HasForeignKey("cursoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -637,13 +637,13 @@ namespace Projeto_Casa_Criancas.Migrations
 
                     b.HasOne("Projeto_Casa_Criancas.Models.Monitor", "monitor")
                         .WithMany()
-                        .HasForeignKey("monitorId")
+                        .HasForeignKey("monitorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Projeto_Casa_Criancas.Models.Professor", "professor")
                         .WithMany()
-                        .HasForeignKey("professorId")
+                        .HasForeignKey("professorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
